@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Genesis DCC</title>
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/dcc_logo.png') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .left-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: 
+        linear-gradient(rgba(20, 30, 48, 0.85), rgba(36, 59, 85, 0.9)),
+        url("{{ url_for('static', filename='images/dq_bg_6.png') }}");
+
+    background-size: cover;
+    background-position: center;
+}
+.card-glass {
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+    .right-section {
+        width: 50%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url("{{ url_for('static', filename='images/dcc.png') }}") center/cover no-repeat;
+    }
+
+    .card-glass {
+        width: 400px;
+        padding: 35px;
+        border-radius: 25px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        color: white;
+    }
+
+    .form-control {
+        border-radius: 25px;
+        border: none;
+        padding: 12px 18px;
+        background: rgba(255,255,255,0.2);
+        color: white !important;
+    }
+
+    .form-control::placeholder {
+        color: rgba(255,255,255,0.7);
+    }
+
+    .form-control:focus {
+        background: rgba(255,255,255,0.3);
+        border: 1px solid rgba(255,255,255,0.5);
+        box-shadow: none;
+    }
+
+    .btn-rounded {
+        border-radius: 25px;
+        padding: 10px;
+    }
+
+    .success-message {
+        display: none;
+        text-align: center;
+    }
+    /* SUCCESS ANIMATION */
+.checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 3;
+    stroke: #4BB543;
+    margin: 20px auto;
+    box-shadow: inset 0px 0px 0px #4BB543;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke: #4BB543;
+    fill: none;
+    animation: stroke 0.6s ease forwards;
+}
+
+.checkmark__check {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.4s ease 0.6s forwards;
+}
+
+@keyframes stroke {
+    100% { stroke-dashoffset: 0; }
+}
+
+@keyframes scale {
+    50% { transform: scale(1.1); }
+}
+
+@keyframes fill {
+    100% { box-shadow: inset 0px 0px 0px 40px rgba(75,181,67,0.1); }
+}
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+}
+/* POPUP BACKDROP */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* POPUP CARD */
+.popup-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    width: 350px;
+    animation: scaleIn 0.4s ease;
+}
+
+/* SCALE ANIMATION */
+@keyframes scaleIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* CHECKMARK */
+.checkmark-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #4CAF50;
+    margin: auto;
+    position: relative;
+    animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+/* CHECK */
+.checkmark {
+    position: absolute;
+    top: 20px;
+    left: 18px;
+    width: 20px;
+    height: 40px;
+    border-right: 4px solid #4CAF50;
+    border-bottom: 4px solid #4CAF50;
+    transform: rotate(45deg);
+    animation: draw 0.4s ease forwards;
+}
+
+@keyframes draw {
+    from { height: 0; width: 0; }
+    to { height: 40px; width: 20px; }
+}
+</style>
+<button class="home-btn" onclick="goHome()">← Home</button>
+<!-- LEFT -->
+<div class="left-section">
+    <div class="card-glass">
+
+        <!-- FORM -->
+        <div id="form-section">
+            <h3 class="text-center mb-3">Request Access</h3>
+            <p class="text-center mb-4">
+                Fill in your details to get access to Genesis DCC
+            </p>
+
+            <form id="requestForm" method="POST">
+                <input type="text" name="name" class="form-control mb-3" placeholder="Full Name" required>
+                <input type="email" name="email" class="form-control mb-3" placeholder="Email Address" required>
+                <input type="text" name="phone" class="form-control mb-3" placeholder="Phone Number" required>
+                <input type="text" name="organization" class="form-control mb-3" placeholder="Organization Name" required>
+                <input type="text" name="department" class="form-control mb-3" placeholder="Department / Role" required>
+
+                <button type="submit" class="btn btn-success w-100 btn-rounded mt-2">
+                    Submit Request
+                </button>
+            </form>
+        </div>
+
+        <!-- SUCCESS -->
+        <div id="success-section" class="success-message">
+
+    <!-- Animated Tick -->
+    <svg class="checkmark" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25"/>
+        <path class="checkmark__check" d="M14 27l7 7 16-16"/>
+    </svg>
+
+    <h4 class="mt-3">Request Submitted</h4>
+
+    <p>
+        Thank you for sharing your details.<br><br>
+        You will receive your login credentials within <b>24–48 hours</b>.
+    </p>
+
+</div>
+
+    </div>
+</div>
+
+<!-- RIGHT -->
+<div class="right-section"></div>
+<script>
+    // 1. HANDLE SIGNUP SUBMISSION
+   document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("requestForm");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();  // 🔥 THIS STOPS GET REQUEST
+
+        const formData = new FormData(form);
+
+        fetch("/request_access", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === "success") {
+                showSuccess();  // your animation
+            } else {
+                alert("Error saving request");
+            }
+        })
+        .catch(err => console.error("Fetch error:", err));
+    });
+
+});
+function showSuccess() {
+    document.getElementById("successPopup").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("successPopup").style.display = "none";
+    window.location.href = "/";  // go to landing page
+}
+    function goHome() {
+    window.location.href = "/";
+}
+    // 2. HANDLE OTP VERIFICATION
+    function verifyOTP() {
+        const otpValue = document.getElementById('otp_input').value;
+        const userValue = document.getElementById('reg_username').value; // Get username from the input
+
+        fetch('/verify_signup_otp', {  // MUST match your @app.route name
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                username: userValue, 
+                otp: otpValue 
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === "success") {
+            showSuccess();
+            window.location.href = "/login"; // Redirect to login
+            } else {
+                alert("Verification Failed: " + data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    function openForm() {
+    document.getElementById("join-form").style.display = "block";
+}
+
+// Submit form
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch('/request_access', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === "success") {
+                showSuccess();  // your animation
+            } else {
+                alert("Error saving request");
+            }
+        })
+        .catch(err => console.error("Fetch Error:", err));
+    });
+
+});
+</script>
+<div id="successPopup" class="popup-overlay">
+    <div class="popup-card">
+
+        <!-- Animated Check -->
+        <div class="checkmark-circle">
+            <div class="checkmark"></div>
+        </div>
+
+        <h4 class="mt-3">Request Submitted</h4>
+        <p>
+            Thank you for sharing your details.<br><br>
+            You will receive your login credentials within 
+            <b>24–48 hours</b>.
+        </p>
+
+        <button class="btn btn-light mt-2" onclick="closePopup()">OK</button>
+    </div>
+</div>
+</body>
+</html>

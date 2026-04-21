@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Genesis Portal Assistant</title>
+  <link rel="stylesheet" href="/static/chatbot.css">
+</head>
+<body>
+
+<div id="chatbot">
+  <div id="chat-header">🤖 Portal Help Assistant</div>
+
+  <div id="chat-body"></div>
+
+  <div id="categories">
+    {% for cat in categories %}
+      <button onclick="loadQuestions('{{cat}}')">{{cat}}</button>
+    {% endfor %}
+    <button onclick="showOthers()">Others</button>
+  </div>
+
+  <input id="chat-input" placeholder="Type your question..." onkeyup="autoSuggest(this.value)">
+  <div id="suggestions"></div>
+</div>
+
+<script>
+function toggleChatbot() {
+  document.getElementById("chatbot-container")
+          .classList.toggle("hidden");
+}
+
+function showMessage(msg) {
+  const body = document.getElementById("chat-body");
+  body.innerHTML += `<div>${msg}</div>`;
+  body.scrollTop = body.scrollHeight;
+}
+
+async function ask(question) {
+  showMessage("<b>You:</b> " + question);
+
+  const res = await fetch("/chatbot/ask", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({question})
+  });
+
+  const data = await res.json();
+  showMessage("<b>Bot:</b> " + data.reply);
+}
+
+async function loadQuestions(category) {
+  const res = await fetch("/chatbot/questions", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({category})
+  });
+
+  const questions = await res.json();
+  questions.forEach(q => {
+    showMessage(`<div class="option" onclick="ask('${q.question}')">${q.question}</div>`);
+  });
+}
+
+function showOthers() {
+  showMessage("Please select a predefined question or start typing.");
+}
+
+async function autoSuggest(text) {
+  if (text.length < 2) return;
+
+  const res = await fetch("/chatbot/suggest", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({text})
+  });
+
+  const suggestions = await res.json();
+  const box = document.getElementById("suggestions");
+  box.innerHTML = "";
+
+  suggestions.forEach(s =>
+    box.innerHTML += `<div onclick="ask('${s}')">${s}</div>`
+  );
+}
+
+</script>
+
+</body>
+</html>

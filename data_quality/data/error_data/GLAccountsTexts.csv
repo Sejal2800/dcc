@@ -1,0 +1,22 @@
+ACCOUNTID,LANGUAGE,SHORT_DESCR,MEDIUM_DESCR,LONG_DESCR
+CF_CFO,EN,null,Cash Flow from Operating Activities (CFO),null
+CF_D,EN,null,Depreciation,null
+CF_I,EN,null,Cash Flow Statement (indirect),null
+FPA1/020,EN,null,Cost of Goods Sold,null
+FPA1/022,EN,null,Gross Revenue,null
+FPA1/023,EN,null,Sales Deductions,null
+FPA1/027,EN,null,Other Operating Expense,null
+FPA1/028,EN,null,Periodic Building Expense,null
+FPA1/029,EN,null,Utilities Expense,null
+FPA1/032,EN,null,Office Expense,null
+FPA1/033,EN,null,Payroll,null
+FPA1/034,EN,null,Travel,null
+FPA1/035,EN,null,Employee Expense Other,null
+FPA1/08,EN,null,Net Income,null
+FPA1/09,EN,null,Earnings Before Interest & Taxes,null
+FPA1/016,EN,null,Operating Income,null
+FPA1/017,EN,null,Gross Margin,null
+FPA1/018,EN,null,Operating Expense,null
+FPA1/021,EN,null,Net Revenue,null
+FPA1/024,EN,null,Building Expense,null
+FPA1/026,EN,null,Employee Expense,null

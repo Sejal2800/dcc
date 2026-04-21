@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis DCC – Existing Rules</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/dcc_logo.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-dark: #2c3e50;
+            --accent-green: #00ffc8;
+            --glass-white: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            background: linear-gradient(rgba(44,62,80,0.8), rgba(44,62,80,0.8)),
+                        url('{{ url_for("static", filename="images/dq_bg_6.png") }}') center/cover fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* --- Header: Wide Layout Fix --- */
+        .company-header {
+            background: white;
+            padding: 0.5rem 2%; 
+            display: flex;
+            align-items: center; 
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 90px;
+            width: 100%;
+        }
+
+        .header-left {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .header-logo {
+            height: 75px; 
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-center {
+            flex: 2;
+            text-align: center;
+        }
+
+        .company-title {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            white-space: nowrap;
+        }
+
+        .header-right-actions {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* --- Nav & Account Button: Hover Fixes --- */
+        .nav-action-btn, .btn-profile {
+            background-color: #f8f9fa !important;
+            border: 1px solid #dee2e6 !important;
+            color: var(--primary-dark) !important;
+            padding: 0 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            height: 42px; 
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-action-btn:hover, 
+        .profile-dropdown .btn-profile:hover, 
+        .profile-dropdown .btn-profile.show {
+            background-color: var(--primary-dark) !important;
+            color: #ffffff !important;
+            border-color: var(--primary-dark) !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-action-btn:hover i, .btn-profile:hover i, .btn-profile.show i {
+            color: #ffffff !important;
+        }
+
+        /* --- Main Content Styling --- */
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .table-card {
+            border-radius: 20px;
+            border: none;
+            background: var(--glass-white);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            padding: 2rem;
+            color: #333;
+        }
+
+        .table-responsive {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #dee2e6;
+        }
+
+        .table thead {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+
+        .table th {
+            font-weight: 600;
+            padding: 15px;
+            border: none;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        .btn-secondary-outline {
+            background: transparent;
+            border: 2px solid var(--primary-dark);
+            color: var(--primary-dark);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary-outline:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="company-header">
+    <div class="header-left">
+        <img src="{{ url_for('static', filename='images/dcc_logo.png') }}" class="header-logo" alt="Logo">
+    </div>
+
+    <div class="header-center">
+        <h1 class="company-title">Genesis Data Control Centre</h1>
+    </div>
+
+    <div class="header-right-actions">
+        <a href="{{ url_for('dq_report') }}" class="nav-action-btn">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+        <a href="{{ url_for('welcome') }}" class="nav-action-btn">
+            <i class="bi bi-house"></i> Home
+        </a>
+
+        <div class="dropdown profile-dropdown">
+            <button class="btn btn-profile dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+                <span class="d-none d-sm-inline">Account</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
+                <li><h6 class="dropdown-header">User Settings</h6></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-person-badge me-2"></i> My Details</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="/logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main class="container py-5">
+    <h1 class="main-title">📄 Existing Data Quality Rules</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                {% for col in columns %}
+                                    <th>{{ col }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                    {% for cell in row %}
+                                        <td>{{ cell }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center mt-5">
+                    <a href="{{ url_for('dq_report') }}" class="btn-secondary-outline">
+                        <i class="bi bi-file-earmark-bar-graph"></i> Back to Reports
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

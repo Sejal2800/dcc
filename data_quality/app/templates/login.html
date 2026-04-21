@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Genesis DCC</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/dcc_logo.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+           .left-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: 
+        linear-gradient(rgba(20, 30, 48, 0.85), rgba(36, 59, 85, 0.9)),
+        url("{{ url_for('static', filename='images/dq_bg_6.png') }}");
+
+    background-size: cover;
+    background-position: center;
+}
+.card-glass {
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.25);
+}
+        /* RIGHT SECTION */
+        .right-section {
+            width: 50%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Fixed: Moved url_for here to stop IDE errors */
+            background: url("{{ url_for('static', filename='images/dcc.png') }}") center/cover no-repeat;
+        }
+
+        /* CENTER WRAPPER */
+        .center-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* CARD */
+        .login-card {
+            width: 350px;
+            padding: 35px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            color: white;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+        }
+
+        /* INPUTS */
+        .form-control {
+            border-radius: 25px;
+            border: none;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 0 10px rgba(0,255,200,0.6);
+            color: white;
+            outline: none;
+        }
+
+        /* BUTTON */
+        .btn-custom {
+            border-radius: 30px;
+            background: rgba(255,255,255,0.9);
+            color: #2c3e50;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 10px;
+        }
+
+        .btn-custom:hover {
+            background: #2c3e50;
+            color: white;
+            box-shadow: 0 0 15px rgba(0,255,200,0.7);
+        }
+
+        /* MODAL STYLING (To match theme) */
+        .modal-content {
+    border-radius: 25px;
+    background: #2c3e50;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    /* Add these two lines */
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
+
+        .link-text {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .link-text a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .link-text a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+}
+    </style>
+</head>
+
+<body>
+<button class="home-btn" onclick="goHome()">← Home</button>
+<div class="left-section">
+    <div class="center-wrapper">
+        <div class="login-card">
+            <h3 class="text-center mb-4">Login</h3>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-danger py-2" style="border-radius: 15px; font-size: 0.85rem;">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <input type="text" name="username" class="form-control mb-3" placeholder="Username" required>
+                <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
+                <button type="submit" class="btn btn-custom w-100">Login</button>
+            </form>
+
+            <div class="link-text">
+                <a href="#" onclick="openModal()">Forgot Password?</a>
+            </div>
+
+            <div class="link-text">
+                <a href="/signup">Don't have an account? Create one</a>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<div class="right-section"></div>
+
+<div id="forgotModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-4" style="background: #2c3e50; color: white; border-radius: 25px;">
+            <h4 class="mb-3">Reset Password</h4>
+
+            <div id="otp-step-1">
+                <p class="small opacity-75">Enter your username to receive a reset code.</p>
+                <input id="fp_username" class="form-control mb-3" placeholder="Username">
+                <button class="btn btn-info w-100" onclick="sendOTP()" style="border-radius: 25px; color: white;">
+                    Send OTP
+                </button>
+            </div>
+
+            <div id="otp-step-2" style="display: none;" class="mt-3 border-top pt-3">
+                <p class="small text-success">OTP Sent! Please check your email.</p>
+                <input id="fp_otp" class="form-control mb-3" placeholder="Enter 6-Digit OTP">
+                <input id="fp_password" type="password" class="form-control mb-3" placeholder="New Password">
+                <button class="btn btn-success w-100" onclick="verifyOTP()" style="border-radius: 25px;">
+                    Verify & Update Password
+                </button>
+            </div>
+            
+            <button type="button" class="btn btn-link btn-sm text-white mt-3" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goHome() {
+    window.location.href = "/";
+}
+    function openModal() {
+        const myModal = new bootstrap.Modal(document.getElementById('forgotModal'));
+        myModal.show();
+    }
+
+    function sendOTP() {
+    const username = document.getElementById('fp_username').value;
+    if(!username) return alert("Please enter a username");
+
+    fetch('/send_otp', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username: username })
+    })
+    .then(res => res.json())
+    .then(data => {
+        // Updated logic to catch various success formats
+        if (data.success || data.status === "otp_sent" || data.status === "success") {
+            // Smoothly transition the modal content
+            document.getElementById('otp-step-1').style.display = 'none';
+            document.getElementById('otp-step-2').style.display = 'block';
+        } else {
+            alert(data.message || "User not found or error sending mail.");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Server error. Please try again later.");
+    });
+}
+
+function verifyOTP() {
+    const username = document.getElementById('fp_username').value;
+    const otp = document.getElementById('fp_otp').value;
+    const password = document.getElementById('fp_password').value;
+
+    if(!otp || !password) return alert("Please fill in all fields");
+
+    fetch('/verify_otp', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            username: username,
+            otp: otp,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success || data.status === "success") {
+            alert("Password updated successfully!");
+            window.location.reload(); 
+        } else {
+            alert(data.message || "Invalid OTP");
+        }
+    })
+    .catch(err => alert("Error verifying OTP."));
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

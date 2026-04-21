@@ -1,0 +1,57 @@
+CUSTOMERID,LANGUAGE,SHORT_DESCR,MEDIUM_DESCR,LONG_DESCR
+#,EN,null,Unassigned,null
+LACU_S02,EN,null,TechCycle,null
+1000153,EN,null,Suburban Cycle,null
+LACU_S03,EN,null,All for Bikes,null
+LACU_S04,EN,null,Bike On,null
+LACU_S05,EN,null,MXBike,null
+CACU_S01,EN,null,G&M Bicycle,null
+CACU_S02,EN,null,XYZ Cycles,null
+CACU_S03,EN,null,The Cycle Factor,null
+USCU_L01,EN,null,Skymart Corp,null
+USCU_L02,EN,null,Toys4U,null
+USCU_L03,EN,null,Viadox,null
+USCU_L04,EN,null,Quotex,null
+USCU_L05,EN,null,Bluestar Corp,null
+CACU_S04,EN,null,Carefree Cycles,null
+CACU_S05,EN,null,KeepCycling,null
+17100001,EN,null,Domestic US Customer 1,null
+17100002,EN,null,Domestic US Customer 2,null
+LACU_S01,EN,null,YourCycleShop,null
+USCU_L06,EN,null,Dexon,null
+USCU_L07,EN,null,Interlude Inc,null
+USCU_L08,EN,null,Veracity,null
+USCU_L09,EN,null,Bigmart,null
+USCU_L10,EN,null,CostClub,null
+USCU_S01,EN,null,Performance Bikes,null
+USCU_S02,EN,null,Custom Sports,null
+USCU_S03,EN,null,Eastside Bikes,null
+USCU_S04,EN,null,Fit Cycles,null
+USCU_S05,EN,null,Greater Hartford Area,null
+USCU_S06,EN,null,Hub & Spokes Inc,null
+USCU_S07,EN,null,Westend Cycles,null
+USCU_S08,EN,null,Velocity Cycles,null
+USCU_S09,EN,null,Greenhigh Bikes,null
+USCU_S10,EN,null,Turbo Bikes,null
+USCU_S11,EN,null,Bike World,null
+USCU_S12,EN,null,Century Cycles,null
+USCU_S13,EN,null,Rolling Bike Shop,null
+USCU_S14,EN,null,Cityscape Cycles,null
+USCU_S15,EN,null,Northside Bikes,null
+USCU_S16,EN,null,Gogo Bikes,null
+USCU_S17,EN,null,Bikepros,null
+USCU-CUS07,EN,null,Fast Sports Inc.,null
+USCU-CUS08,EN,null,High Ride Inc.,null
+USCU-CUS09,EN,null,HT Bikes,null
+USCU-CUS22,EN,null,HLL Bikes,null
+USCU-CUS23,EN,null,Rock On Bikes,null
+USCU-CUS25,EN,null,Symphony Sports Inc,null
+USCU-CUS36,EN,null,ebike 36,null
+USCU-CUS54,EN,null,EBIKE54,null
+USCU-CUS55,EN,null,EBIKE55,null
+USCU-CUS63,EN,null,EBIKE63,null
+USCU-L-001,EN,null,PBIKE01,null
+USCU-P-008,EN,null,eBike008,null
+L1,EN,null,Speciality,null
+L3,EN,null,Medium,null
+L2,EN,null,Large,null

@@ -1,0 +1,46 @@
+--create database dcc
+
+--CREATE TABLE customer (
+--	CUSTOMERID        INT PRIMARY KEY,
+--	CUSTOMERTYPEID    INT,
+--	COUNTRY           VARCHAR(50),
+--	LANGUAGE          VARCHAR(50),
+--	CREATEDBY         VARCHAR(100),
+--	CREATEDAT         DATETIME2,
+--	CHANGEDBY         VARCHAR(100),
+--	CHANGEDAT         DATETIME2
+--);
+
+--INSERT INTO customer (
+--    CUSTOMERID,
+--    CUSTOMERTYPEID,
+--    COUNTRY,
+--    LANGUAGE,
+--    CREATEDBY,
+--    CREATEDAT,
+--    CHANGEDBY
+--)
+--SELECT
+--    n,
+--    CASE WHEN n % 10 = 0 THEN NULL ELSE n % 5 END,
+--    CASE WHEN n % 7 = 0 THEN 'XXX' ELSE 'India' END,
+--    CASE WHEN n % 6 = 0 THEN NULL ELSE 'EN' END,
+--    'system',
+--    CURRENT_TIMESTAMP,
+--    'admin'
+--FROM (
+--    SELECT TOP (100)
+--           ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+--    FROM sys.objects
+--) AS nums;
+
+
+--CREATE TABLE dq_query_log (
+--    log_id INT IDENTITY(1,1) PRIMARY KEY,
+--    table_name NVARCHAR(255),
+--    column_name NVARCHAR(255),
+--    sql_query NVARCHAR(MAX),
+--    executed_at DATETIME DEFAULT GETDATE(),
+--    status NVARCHAR(50),
+--    row_count INT
+--);

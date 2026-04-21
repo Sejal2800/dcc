@@ -1,0 +1,9 @@
+PRODCATEGORYID,LANGUAGE,SHORT_DESCR,MEDIUM_DESCR,LONG_DESCR
+FG,EN,Finished Goods,null,null
+CR,EN,Cruise,null,null
+MT,EN,Mountain,null,null
+RB,EN,Racing Bikes,null,null
+RC,EN,Racing,null,null
+TM,EN,Trading Materials,null,null
+YH,EN,Youth,null,null
+#,EN,Unassigned,null,null

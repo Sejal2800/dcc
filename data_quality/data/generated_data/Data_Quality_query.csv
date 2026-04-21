@@ -1,0 +1,263 @@
+file_id,Title,table_name,column_name,rule_no,business_rule_definition,attribute_group,dimension,functionality,expected
+1,,Customer,COUNTRY,CUSTM_1.8,Country should not contain special character,Customer details,Completeness,special_character,
+1,,Customer,"CUSTOMERID,CUSTOMERTYPEID",CUSTM_1.23,Length should be less than given length,Customer details,Completeness,length,11
+1,,GLAccounts,"ACCOUNTID,ACCOUNTTYPEID,LANGUAGE",CUSTM_1.23,Length should be less than given length,GL details,Completeness,length,10
+1,,ProductCategoryTexts,SHORT_DESCR,GLCOM_10.11,Length should be in range of 2-4 characters,Product details,Conformity,fixed_length,6
+1,,FinancialTransactions,PROFITCENTERID,DUPL_1.1,Check duplicates for the record,Finance details,Duplicity,duplicity,null
+1,,Customer,CUSTOMERID,CUSTM_1.1,CustomerId should contain a number (alphanumeric) ,Customer details,Completeness,not_contain_number,
+1,,Customer,CUSTOMERID,CUSTM_1.2,CustomerId should not contain special character,Customer details,Completeness,special_character,
+1,,Customer,CUSTOMERID,CUSTM_1.3,CustomerID should not be null,Customer details,Completeness,null,
+1,,Customer,CUSTOMERID,CUSTM_1.20,Length should upto 8-10 characters,Customer details,Conformity,ranged_length,"8,10"
+1,,Customer,CUSTOMERTYPEID,CUSTM_1.4,Length should be only 2 charcater,Customer details,Conformity,fixed_length,2
+1,,Customer,CUSTOMERTYPEID,CUSTM_1.5,CustomerTypeID should not be null,Customer details,Completeness,null,
+1,,Customer,CUSTOMERTYPEID,CUSTM_1.6,CustomerTypeID should not contain special character,Customer details,Completeness,special_character,
+1,,Customer,CUSTOMERTYPEID,CUSTM_1.7,"Defaulted to ""CAPITALIZED""",Customer details,Completeness,is_lower,
+1,,Customer,COUNTRY,CUSTM_1.8,Country should not contain special character.,Customer details,Completeness,special_character,
+1,,Customer,COUNTRY,CUSTM_1.9,Country should not be null,Customer details,Completeness,null,
+1,,Customer,COUNTRY,CUSTM_1.10,"Defaulted to ""CAPITALIZED""",Customer details,Completeness,is_lower,
+1,,Customer,COUNTRY,CUSTM_1.21,Length should be 2 characters,Customer details,Conformity,fixed_length,2
+1,,Customer,LANGUAGE,CUSTM_1.11,Language should not be null,Customer details,Completeness,null,
+1,,Customer,LANGUAGE,CUSTM_1.12,Default to 'EN',Customer details,Completeness,not_like,EN
+1,,Customer,LANGUAGE,CUSTM_1.13,Default to 'CAPITALIZED',Customer details,Completeness,is_lower,
+1,,Customer,LANGUAGE,CUSTM_1.22,Length should be 2 characters,Customer details,Conformity,fixed_length,2
+1,,Customer,CREATEDBY,CUSTM_1.14,Created by should not be null,Customer details,Completeness,null,
+1,,Customer,CREATEDAT,CUSTM_1.15,"It should be in Dateformat ""YYYYMMDD""",Customer details,Completeness,date_format,
+1,,Customer,CREATEDAT,CUSTM_1.16,Created at should not be null,Customer details,Completeness,null,
+1,,Customer,CHANGEDBY,CUSTM_1.17,Changed by should not be null,Customer details,Completeness,null,
+1,,Customer,CHANGEDAT,CUSTM_1.18,"It should be in Dateformat ""YYYYMMDD""",Customer details,Completeness,date_format,
+1,,Customer,CHANGEDAT,CUSTM_1.19,ChangedAt at should not be null,Customer details,Completeness,null,
+1,,Customer,"LANGUAGE, COUNTRY, CUSTOMERTYPEID",CUSTM_1.23,Length should be less than given length,Customer details,Completeness,length,20
+1,,CustomersHierarchy,HIERARCHYID,CUSTM_2.1,Hierarchyid should not contain special character.,Customer details,Completeness,special_character,
+1,,CustomersHierarchy,HIERARCHYID,CUSTM_2.2,Hierarchyid should contain a number (alphanumeric) . ,Customer details,Completeness,not_contain_number,
+1,,CustomersHierarchy,HIERARCHYID,CUSTM_2.3,Hierarchyid should not be null,Customer details,Completeness,null,
+1,,CustomersHierarchy,DESCRIPTION,CUSTM_2.4,Description should not be null,Customer details,Completeness,null,
+1,,CustomersHierarchy,LEVEL,CUSTM_2.5,Length should be 2 characters,Customer details,Conformity,fixed_length,2
+1,,CustomersHierarchy,LEVEL,CUSTM_2.6,Level should not be null,Customer details,Completeness,null,
+1,,CustomerTexts,CUSTOMERID,CUSTM_3.1,CustomerId should contain a number (alphanumeric) . ,Customer details,Completeness,not_contain_number,
+1,,CustomerTexts,CUSTOMERID,CUSTM_3.2,CustomerId  should not contain special character.,Customer details,Completeness,special_character,
+1,,CustomerTexts,CUSTOMERID,CUSTM_1.3,CustomerID should not be null,Customer details,Completeness,null,
+1,,CustomerTexts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Customer details,Completeness,is_lower,
+1,,CustomerTexts,LANGUAGE,CUSTM_1.11,Language should not be null,Customer details,Completeness,null,
+1,,CustomerTexts,LANGUAGE,CUSTM_3.9,default to 'EN',Customer details,Completeness,not_like,EN
+1,,CustomerTexts,MEDIUM_DESCR,CUSTM_3.6,Medium_descr should not be null,Customer details,Completeness,null,
+1,,CustomerTexts,SHORT_DESCR,CUSTM_3.7,Short_descr should not be null,Customer details,Completeness,null,
+1,,CustomerTexts,LONG_DESCR,CUSTM_3.8,Long_descr should not be null,Customer details,Completeness,null,
+1,,CustomerType,CUSTOMERTYPEID,CUSTM_4.1,CustomerId should contain a number (alphanumeric) . ,Customer details,Completeness,not_contain_number,
+1,,CustomerType,CUSTOMERTYPEID,CUSTM_1.4,Length should be only 2 charcater,Customer details,Conformity,fixed_length,2
+1,,CustomerType,CUSTOMERTYPEID,CUSTM_4.3,CustomerId should not be null,Customer details,Completeness,null,
+1,,CustomerType,LANGUAGE,CUSTM_1.11,Language should not be null,Customer details,Completeness,null,
+1,,CustomerType,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Customer details,Completeness,is_lower,
+1,,CustomerType,LANGUAGE,CUSTM_4.12,Length should be of 2 character,Customer details,Conformity,fixed_length,2
+1,,CustomerType,CREATEDBY,CUSTM_1.14,Created by should not be null,Customer details,Completeness,null,
+1,,CustomerType,CREATEDAT,CUSTM_1.15,"It should be in Dateformat ""YYYYMMDD""",Customer details,Completeness,date_format,
+1,,CustomerType,CREATEDAT,CUSTM_1.16,Created at should not be null,Customer details,Completeness,null,
+1,,CustomerType,CREATEDAT,CUSTM_1.15,"It should be in Dateformat ""YYYYMMDD""",Customer details,Completeness,date_format,
+1,,CustomerType,CREATEDAT,CUSTM_1.16,Created at should not be null,Customer details,Completeness,null,
+1,,CustomerType,CHANGEDBY,CUSTM_1.17,Changed by should not be null,Customer details,Completeness,null,
+1,,CustomerType,CHANGEDAT,CUSTM_1.18,"It should be in Dateformat ""YYYYMMDD""",Customer details,Completeness,date_format,
+1,,CustomerType,CHANGEDAT,CUSTM_4.11,Changed at should not be null,Customer details,Completeness,null,
+1,,CustomerTypeTexts,CUSTOMERTYPEID,CUSTM_1.5,CustomerTypeID should not be null,Customer details,Completeness,null,
+1,,CustomerTypeTexts,CUSTOMERTYPEID,CUSTM_1.7,"Defaulted to ""CAPITALIZED""",Customer details,Completeness,is_lower,
+1,,CustomerTypeTexts,CUSTOMERTYPEID,CUSTM_5.3,Length should upto 2 characters,Customer details,Conformity,fixed_length,2
+1,,CustomerTypeTexts,LANGUAGE,CUSTM_1.11,Language should not be null,Customer details,Completeness,null,
+1,,CustomerTypeTexts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Customer details,Completeness,is_lower,
+1,,CustomerTypeTexts,LANGUAGE,CUSTM_3.9,default to 'EN',Customer details,Completeness,not_like,EN
+1,,CustomerTypeTexts,SHORT_DESCR,CUSTM_3.7,Short_descr should not be null,Customer details,Completeness,null,
+1,,CustomerTypeTexts,SHORT_DESCR,CUSTM_5.6,"Defaulted to ""CAPITALIZED""",Customer details,Completeness,is_lower,
+1,,CustomerTypeTexts,MEDIUM_DESCR,CUSTM_3.6,Medium_descr should not be null,Customer details,Completeness,null,
+1,,CustomerTypeTexts,LONG_DESCR,CUSTM_3.8,Long_descr should not be null,Customer details,Completeness,null,
+1,,FinancialTransactions,TRANSACTIONID,FINANM_1.1,TransactionID should be a number.,Finance  details,Completeness,is_numeric,
+1,,FinancialTransactions,TRANSACTIONID,FINANM_6.2,"TransactionID should not be ""NULL.",Finance  details,Completeness,null,
+1,,FinancialTransactions,TRANSACTIONID,FINANM_6.23,Length should be upto 10 character.,Finance  details,Conformity,ranged_length,"0,10"
+1,,FinancialTransactions,DATE,FINANM_6.3,"It should be in Dateformat ""YYYYMMDD""",Finance  details,Completeness,date_format,
+1,,FinancialTransactions,DATE,FINANM_6.4,Date should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,VALUE,FINANM_6.5,Value should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,ACCOUNTID,FINANM_6.6,AccountID should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,ACCOUNTID,FINANM_6.7,"It should start with ""FPA""",Finance  details,Completeness,start_with,%FPA
+1,,FinancialTransactions,ACCOUNTTYPEID,FINANM_6.8,AccountTypeID should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,ACCOUNTTYPEID,FINANM_6.9,"Defaulted to ""CAPITALIZED""",Finance  details,Completeness,is_lower,
+1,,FinancialTransactions,CUSTOMERID,CUSTM_1.2,CustomerId should not contain special character,Finance  details,Completeness,special_character,
+1,,FinancialTransactions,CUSTOMERID,CUSTM_3.1,CustomerId should contain a number (alphanumeric) . ,Finance  details,Completeness,not_contain_number,
+1,,FinancialTransactions,CUSTOMERID,CUSTM_1.3,CustomerID should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,CUSTOMERTYPEID,FINANM_6.13,CustomerTypeId Must not be blank,Finance  details,Completeness,null,
+1,,FinancialTransactions,CUSTOMERTYPEID,FINANM_6.14,Length should be only two charcater,Finance  details,Conformity,fixed_length,2
+1,,FinancialTransactions,CUSTOMERTYPEID,FINANM_6.15,CustomerTypeId should not contain special character,Finance  details,Completeness,special_character,
+1,,FinancialTransactions,PRODUCTID,FINANM_6.16,ProductID should not contain special character,Finance  details,Completeness,special_character,
+1,,FinancialTransactions,PRODUCTID,FINANM_6.17,ProductID should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,PRODUCTCATEGORYID,FINANM_6.18,ProductCategoryID should not contain special character,Finance  details,Completeness,special_character,
+1,,FinancialTransactions,PRODUCTCATEGORYID,FINANM_6.19,Length should be only two charcater,Finance  details,Conformity,fixed_length,2
+1,,FinancialTransactions,PRODUCTCATEGORYID,FINANM_6.20,ProductCategoryID should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,PROFITCENTERID,FINANM_6.21,ProfitCenterID should not be null,Finance  details,Completeness,null,
+1,,FinancialTransactions,VERSION,FINANM_6.22,Version should not be null,Finance  details,Completeness,null,
+1,,GLAccountsHierarchy,HIERARCHYID,CUSTM_2.3,Hierarchyid should not be null,GL details,Completeness,null,
+1,,GLAccountsHierarchy,HIERARCHYID,GLCOM_7.2,Hierarchyid should start with 'FPA',GL details,Completeness,start_with,%FPA
+1,,GLAccountsHierarchy,LEVEL,GLCOM_7.3,Level should start with 'FPA',GL details,Completeness,start_with,%FPA
+1,,GLAccountsHierarchy,LEVEL,CUSTM_2.6,Level should not be null,GL details,Completeness,null,
+1,,GLAccountsHierarchy,DESCRIPTION,CUSTM_2.4,Description should not be null,GL details,Completeness,null,
+1,,GLAccounts,ACCOUNTID,FINANM_6.6,AccountID should not be null,GL details,Completeness,null,
+1,,GLAccounts,ACCOUNTID,GLCOM_8.2,AccountID should start with 'FPA',GL details,Completeness,start_with,%FPA
+1,,GLAccounts,ACCOUNTTYPEID,FINANM_6.8,AccountTypeID should not be null,GL details,Completeness,null,
+1,,GLAccounts,ACCOUNTTYPEID,FINANM_6.9,"Defaulted to ""CAPITALIZED""",GL details,Completeness,is_lower,
+1,,GLAccounts,ACCOUNTTYPEID,GLCOM_8.14,Length should be upto 3 characters,GL details,Conformity,ranged_length,"0,3"
+1,,GLAccounts,LANGUAGE,CUSTM_1.11,Language should not be null,GL details,Completeness,null,
+1,,GLAccounts,LANGUAGE,GLCOM_8.6,Defaulted to 'EN',GL details,Completeness,not_like,EN
+1,,GLAccounts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",GL details,Completeness,is_lower,
+1,,GLAccounts,LANGUAGE,GLCOM_8.15,Length should be upto 2 characters,GL details,Conformity,ranged_length,"0,2"
+1,,GLAccounts,CREATEDBY,CUSTM_1.14,Created by should not be null,GL details,Completeness,null,
+1,,GLAccounts,CREATEDAT,GLCOM_8.9,Createdat should not be null,GL details,Completeness,null,
+1,,GLAccounts,CREATEDAT,CUSTM_1.15,"It should be in Dateformat ""YYYYMMDD""",GL details,Completeness,date_format,
+1,,GLAccounts,CHANGEDBY,CUSTM_1.17,Changed by should not be null,GL details,Completeness,null,
+1,,GLAccounts,CHANGEDAT,CUSTM_1.18,"It should be in Dateformat ""YYYYMMDD""",GL details,Completeness,date_format,
+1,,GLAccounts,CHANGEDAT,GLCOM_8.13,Change at should not be null,GL details,Completeness,null,
+1,,GLAccountsTexts,ACCOUNTID,FINANM_6.6,AccountID should not be null,GL details,Completeness,null,
+1,,GLAccountsTexts,ACCOUNTID,GLCOM_8.2,AccountID should start with 'FPA',GL details,Completeness,start_with,%FPA
+1,,GLAccountsTexts,LANGUAGE,CUSTM_1.11,Language should not be null,GL details,Completeness,null,
+1,,GLAccountsTexts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",GL details,Completeness,is_lower,
+1,,GLAccountsTexts,LANGUAGE,GLCOM_8.6,Defaulted to 'EN',GL details,Completeness,not_like,EN
+1,,GLAccountsTexts,SHORT_DESCR,CUSTM_3.7,Short_descr should not be null,GL details,Completeness,null,
+1,,GLAccountsTexts,MEDIUM_DESCR,CUSTM_3.6,Medium_descr should not be null,GL details,Completeness,null,
+1,,GLAccountsTexts,LONG_DESCR,CUSTM_3.8,Long_descr should not be null,GL details,Completeness,null,
+1,,GLAccountType,ACCOUNTTYPEID,FINANM_6.8,AccountTypeID should not be null,GL details,Completeness,null,
+1,,GLAccountType,ACCOUNTTYPEID,FINANM_6.9,"Defaulted to ""CAPITALIZED""",GL details,Completeness,is_lower,
+1,,GLAccountType,ACCOUNTTYPEID,GLCOM_10.11,Length should be in range of 2-4 characters ,GL details,Conformity,ranged_length,"2,4"
+1,,GLAccountType,LANGUAGE,CUSTM_1.11,Language should not be null,GL details,Completeness,null,
+1,,GLAccountType,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",GL details,Completeness,is_lower,
+1,,GLAccountType,LANGUAGE,GLCOM_8.6,Defaulted to 'EN',GL details,Completeness,not_like,EN
+1,,GLAccountType,CREATEDBY,CUSTM_1.14,Created by should not be null,GL details,Completeness,null,
+1,,GLAccountType,CREATEDAT,CUSTM_1.15,"It should be in Dateformat ""YYYYMMDD""",GL details,Completeness,date_format,
+1,,GLAccountType,CREATEDAT,CUSTM_1.16,Created at should not be null,GL details,Completeness,null,
+1,,GLAccountType,CHANGEDBY,CUSTM_1.17,Changed by should not be null,GL details,Completeness,null,
+1,,GLAccountType,CHANGEDAT,CUSTM_1.18,"It should be in Dateformat ""YYYYMMDD""",GL details,Completeness,date_format,
+1,,GLAccountType,CHANGEDAT,CUSTM_4.11,Changed at should not be null,GL details,Completeness,null,
+1,,GLAccountTypeTexts,ACCOUNTTYPEID,FINANM_6.8,AccountTypeID should not be null,GL details,Completeness,null,
+1,,GLAccountTypeTexts,ACCOUNTTYPEID,FINANM_6.9,"Defaulted to ""CAPITALIZED""",GL details,Completeness,is_lower,
+1,,GLAccountTypeTexts,LANGUAGE,CUSTM_1.11,Language should not be null,GL details,Completeness,null,
+1,,GLAccountTypeTexts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",GL details,Completeness,is_lower,
+1,,GLAccountTypeTexts,LANGUAGE,GLCOM_8.6,Defaulted to 'EN',GL details,Completeness,not_like,EN
+1,,GLAccountTypeTexts,SHORT_DESCR,CUSTM_3.7,Short_descr should not be null,GL details,Completeness,null,
+1,,GLAccountTypeTexts,MEDIUM_DESCR,GLCOM_11.6,Medium_Descr should not be null,GL details,Completeness,null,
+1,,GLAccountTypeTexts,LONG_DESCR,CUSTM_3.8,Long_descr should not be null,GL details,Completeness,null,
+1,,Product,CHANGEDAT,CUSTM_1.18,"It should be in Dateformat ""YYYYMMDD""",Product details,Completeness,date_format,
+1,,Product,CHANGEDAT,CUSTM_4.11,Changed at should not be null,Product details,Completeness,null,
+1,,Product,CHANGEDBY,CUSTM_1.17,Changed by should not be null,Product details,Completeness,null,
+1,,Product,CREATEDAT,CUSTM_1.15,"It should be in Dateformat ""YYYYMMDD""",Product details,Completeness,date_format,
+1,,Product,CREATEDAT,GLCOM_8.9,Createdat should not be null,Product details,Completeness,null,
+1,,Product,CREATEDBY,PRODM_12.6,Createdby should not be null,Product details,Completeness,null,
+1,,Product,CURRENCY,PRODM_12.7,"Currency Default Value  as ""USD"".",Product details,Completeness,not_like,USD
+1,,Product,CURRENCY,PRODM_12.8,Currency should not be null.,Product details,Completeness,null,
+1,,Product,DEPTH,PRODM_12.9,"Depth should be  Default Value as  ""0.000""",Product details,Completeness,not_like,0
+1,,Product,DIMENSIONUNIT,PRODM_12.10,"Dimensionunit should be Default Value as ""metre""",Product details,Completeness,not_like,metre
+1,,Product,DIMENSIONUNIT,PRODM_12.11,Dimensionunit Should not be null,Product details,Completeness,null,
+1,,Product,HEIGHT,PRODM_12.12,"Height should be Default Value as  ""0.000""",Product details,Completeness,not_like,0
+1,,Product,LANGUAGE,CUSTM_1.13,Default to 'CAPITALIZED',Product details,Completeness,is_lower,
+1,,Product,LANGUAGE,CUSTM_1.12,Default to 'EN',Product details,Completeness,not_like,EN
+1,,Product,LANGUAGE,PRODM_12.15,Language should not be null.,Product details,Completeness,null,
+1,,Product,PRICE,PRODM_12.16, Price should not be null.,Product details,Completeness,null,
+1,,Product,PRICE,PRODM_12.17,Price should contain only numbers.,Product details,Completeness,is_not_numeric,
+1,,Product,PRODUCTID,PRODM_12.18,Should be in length of 8 to 10 characters,Product details,Completeness,ranged_length,"8,10"
+1,,Product,PRODUCTID,PRODM_12.19,Product id should not be null.,Product details,Completeness,null,
+1,,Product,PRODUCTCATEGORYID,PRODM_12.20,Length should be upto 2 character.,Product details,Completeness,fixed_length,2
+1,,Product,PRODUCTCATEGORYID,PRODM_12.21,Default to 'Capitalized',Product details,Completeness,is_numeric,
+1,,Product,PRODUCTCATEGORYID,PRODM_12.22,Product Category ID should not be null,Product details,Completeness,null,
+1,,Product,PRODUCTCATEGORYID,PRODM_12.23,Product Category ID should not contain special charcter,Product details,Completeness,special_character,
+1,,Product,PRODUCTPICURL,PRODM_12.24,ProductPicURL should not be null,Product details,Completeness,null,
+1,,Product,QUANTITYUNIT,PRODM_12.25," QuantityUnit  Default Value as ""EA"".",Product details,Completeness,not_like,EA
+1,,Product,QUANTITYUNIT,PRODM_12.26,QuantityUnit should not be null.,Product details,Completeness,null,
+1,,Product,SUPPLIER_PARTNERID,PRODM_12.27,Supplier_PartnerID should not be null.,Product details,Completeness,null,
+1,,Product,SUPPLIER_PARTNERID,PRODM_12.28,Supplier_PartnerID should contain only numbers.,Product details,Completeness,is_not_numeric,
+1,,Product,SUPPLIER_PARTNERID,PRODM_12.29,Supplier_PartnerID length should be10 characters.,Product details,Conformity,fixed_length,10
+1,,Product,TAXTARIFFCODE,PRODM_12.30,"TaxTariffCode Default Value as ""1"".",Product details,Completeness,not_like,1
+1,,Product,TAXTARIFFCODE,PRODM_12.31,TaxTariffCode should not be null.,Product details,Completeness,null,
+1,,Product,TYPECODE,PRODM_12.32,"Type code should be Default Value  as ""PR"".",Product details,Completeness,not_like,PR
+1,,Product,TYPECODE,PRODM_12.33,Type code should not be null or null.,Product details,Completeness,null,
+1,,Product,WEIGHTMEASURE,PRODM_12.34,WeightMeasure should not be null.,Product details,Completeness,null,
+1,,Product,WEIGHTMEASURE,PRODM_12.35,WeightMeasure should contain only numbers.,Product details,Completeness,is_not_numeric,
+1,,Product,WEIGHTUNIT,PRODM_12.36,"WeightUnit should be Default Value as ""KG"".",Product details,Completeness,not_like,KG
+1,,Product,WEIGHTUNIT,PRODM_12.37,WeightUnit  should not be null.,Product details,Completeness,null,
+1,,Product,WIDTH,PRODM_12.38,"Width Default Value as  ""0.000""",Product details,Completeness,not_like,0
+1,,Product,WIDTH,PRODM_12.39,Width should not be null.,Product details,Completeness,null,
+1,,ProductCategories,PRODCATEGORYID,PRODM_13.1,"Defaulted to ""CAPITALIZED""",Product details,Completeness,is_lower,
+1,,ProductCategories,PRODCATEGORYID,PRODM_13.2,ProductCategoryID should not be null.,Product details,Completeness,null,
+1,,ProductCategories,PRODCATEGORYID,PRODM_13.3,ProductCategoryID should not contain special character,Product details,Completeness,special_character,
+1,,ProductCategories,LANGUAGE,CUSTM_1.11,Language should not be null,Product details,Completeness,null,
+1,,ProductCategories,LANGUAGE,PRODM_13.5,"Defaulted to ""EN""",Product details,Completeness,not_like,EN
+1,,ProductCategories,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Product details,Completeness,is_lower,
+1,,ProductCategories,CREATEDBY,CUSTM_1.14,Created by should not be null,Product details,Completeness,null,
+1,,ProductCategories,CREATEDAT,PRODM_13.8,"Date should be in ""YYYYMMDD"" format",Product details,Completeness,date_format,
+1,,ProductCategories,CREATEDAT,PRODM_13.9,Created at  should not be null,Product details,Completeness,null,
+1,,ProductCategories,CHANGEDBY,CUSTM_1.17,Changed by should not be null,Product details,Completeness,null,
+1,,ProductCategories,CHANGEDAT,PRODM_13.11,"Date should be in ""YYYYMMDD"" format",Product details,Completeness,date_format,
+1,,ProductCategories,CHANGEDAT,CUSTM_4.11,Changed at should not be null,Product details,Completeness,null,
+1,,ProductCategoryTexts,PRODCATEGORYID,PRODM_13.2,ProductCategoryID should not be null.,Product details,Completeness,null,
+1,,ProductCategoryTexts,PRODCATEGORYID,PRODM_13.3,ProductCategoryID should not contain special character,Product details,Completeness,special_character,
+1,,ProductCategoryTexts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Product details,Completeness,is_lower,
+1,,ProductCategoryTexts,LANGUAGE,CUSTM_1.11,Language should not be null,Product details,Completeness,null,
+1,,ProductCategoryTexts,LANGUAGE,PRODM_13.5,"Defaulted to ""EN""",Product details,Completeness,not_like,EN
+1,,ProductCategoryTexts,SHORT_DESCR,PRODM_14.5,Short_Descr should not be null,Product details,Completeness,null,
+1,,ProductCategoryTexts,MEDIUM_DESCR,CUSTM_3.6,Medium_descr should not be null,Product details,Completeness,null,
+1,,ProductCategoryTexts,LONG_DESCR,CUSTM_3.8,Long_descr should not be null,Product details,Completeness,null,
+1,,ProductHierarchy,HIERARCHYID,PRODM_15.1,Hierarchyid should not be null.,Product details,Completeness,null,
+1,,ProductHierarchy,DESCRIPTION ,PRODM_15.2,Description should not be null or null.,Product details,Completeness,null,
+1,,ProductHierarchy,Level,PRODM_15.3,Level should not contain numbers.,Product details,Completeness,not_contain_number,
+1,,ProductHierarchy,Level,PRODM_15.5,Level should start with 'Z',Product details,Conformity,start_with,%Z
+1,,ProductHierarchy,DESCRIPTION,PRODM_15.4,Description should not contain special character,Product details,Conformity,special_character,
+1,,ProductTexts,PRODUCTID,PRODM_15.6,Product ID should not be null,Product details,Completeness,null,
+1,,ProductTexts,PRODUCTID,PRODM_15.7,Length should be in range of 7-10,Product details,Completeness,ranged_length,"7,10"
+1,,ProductTexts,LANGUAGE,PRODM_13.5,"Defaulted to ""EN""",Product details,Completeness,not_like,EN
+1,,ProductTexts,LANGUAGE,CUSTM_1.11,Language should not be null,Product details,Completeness,null,
+1,,ProductTexts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Product details,Completeness,is_lower,
+1,,ProductTexts,SHORT_DESCR,PRODM_15.11,Short_Descr should  not be null,Product details,Completeness,null,
+1,,ProductTexts,MEDIUM_DESCR,PRODM_15.12,Medium_Descr should  not be null,Product details,Completeness,null,
+1,,ProductTexts,LONG_DESCR,CUSTM_3.8,Long_descr should not be null,Product details,Completeness,null,
+1,,ProfitCenter,PROFITCENTERID,PROFM_16.1,Length should be of 7-10 characters,Profit details,Completeness,ranged_length,"7,10"
+1,,ProfitCenter,PROFITCENTERID,PROFM_16.2,ProfitCenterID should contain a number (alphanumeric) .,Profit details,Completeness,not_contain_number,
+1,,ProfitCenter,PROFITCENTERID,PROFM_16.3,Should not contain special characters,Profit details,Completeness,special_character,
+1,,ProfitCenter,PROFITCENTERID,FINANM_6.21,ProfitCenterID should not be null,Profit details,Completeness,null,
+1,,ProfitCenter,LANGUAGE,CUSTM_1.11,Language should not be null,Profit details,Completeness,null,
+1,,ProfitCenter,LANGUAGE,PRODM_13.5,"Defaulted to ""EN""",Profit details,Completeness,not_like,EN
+1,,ProfitCenter,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Profit details,Completeness,is_lower,
+1,,ProfitCenter,CREATEDBY,CUSTM_1.14,Created by should not be null,Profit details,Completeness,null,
+1,,ProfitCenter,CREATEDAT,CUSTM_1.15,"It should be in Dateformat ""YYYYMMDD""",Profit details,Completeness,date_format,
+1,,ProfitCenter,CREATEDAT,CUSTM_1.16,Created at should not be null,Profit details,Completeness,null,
+1,,ProfitCenter,CHANGEDBY,CUSTM_1.17,Changed by should not be null,Profit details,Completeness,null,
+1,,ProfitCenter,CHANGEDAT,CUSTM_1.18,"It should be in Dateformat ""YYYYMMDD""",Profit details,Completeness,date_format,
+1,,ProfitCenter,CHANGEDAT,CUSTM_4.11,Changed at should not be null,Profit details,Completeness,null,
+1,,ProfitCenterHierarchy,HIERARCHYID,PROFM_17.1,Hierarchyid should not contain special character,Profit details,Completeness,null,
+1,,ProfitCenterHierarchy,HIERARCHYID,CUSTM_2.3,Hierarchyid should not be null,Profit details,Completeness,null,
+1,,ProfitCenterHierarchy,HIERARCHYID,PROFM_17.4,Description should not contain special character,Profit details,Conformity,special_character,
+1,,ProfitCenterHierarchy,HIERARCHYID,PROFM_17.5,Level should not contain special character,Profit details,Completeness,null,
+1,,ProfitCenterHierarchy,DESCRIPTION,CUSTM_2.4,Description should not be null,Profit details,Completeness,null,
+1,,ProfitCenterHierarchy,LEVEL,CUSTM_2.6,Level should not be null,Profit details,Completeness,null,
+1,,ProfitCenterTexts,PROFITCENTERID,PROFM_16.1,Length should be of 7-10 characters,Profit details,Completeness,ranged_length,"7,10"
+1,,ProfitCenterTexts,PROFITCENTERID,PROFM_16.2,ProfitCenterID should contain a number (alphanumeric) .,Profit details,Completeness,not_contain_number,
+1,,ProfitCenterTexts,PROFITCENTERID,PROFM_18.3,"ProfitCenterID should not be ""NULL.",Profit details,Completeness,null,
+1,,ProfitCenterTexts,PROFITCENTERID,PROFM_16.3,Should not contain special characters,Profit details,Completeness,special_character,
+1,,ProfitCenterTexts,LANGUAGE,PRODM_13.5,"Defaulted to ""EN""",Profit details,Completeness,not_like,EN
+1,,ProfitCenterTexts,LANGUAGE,PROFM_18.6,Language should not be null .,Profit details,Completeness,null,
+1,,ProfitCenterTexts,LANGUAGE,CUSTM_3.4,"Defaulted to ""CAPITALIZED""",Profit details,Completeness,is_lower,
+1,,ProfitCenterTexts,SHORT_DESCR,PROFM_18.8,Short_Decsr should not be null,Profit details,Completeness,null,
+1,,ProfitCenterTexts,MEDIUM_DESCR,CUSTM_3.6,Medium_descr should not be null,Profit details,Completeness,null,
+1,,ProfitCenterTexts,LONG_DESCR,CUSTM_3.8,Long_descr should not be null,Profit details,Completeness,null,
+1,,Customer,CUSTOMERID,CUSTM_1.1,CustomerId should contain a number (alphanumeric) ,Customer details,Completeness,not_contain_number,
+1,,Customer,CUSTOMERID,CUSTM_1.1,CustomerId should contain a number (alphanumeric) ,Customer details,Completeness,not_contain_number,
+1,,Customer,CUSTOMERID,CUSTM_1.1,CustomerId should contain a number (alphanumeric) ,Customer details,Completeness,not_contain_number,
+1,,Customer,CUSTOMERID,CUSTM_1.1,CustomerId should contain a number (alphanumeric) ,Customer details,Completeness,not_contain_number,
+1,,GLAccountTypeTexts,ACCOUNTTYPEID,GLCOM_10.3,Check duplicates for the record,GL details,Duplicity,duplicity,null
+1,,Customer,CUSTOMERID,CUSTM_1.4,Check duplicates for the record,Customer details,Duplicity,duplicity,null
+1,,CustomersHierarchy,HIERARCHYID,CUSTM_2.4,Check duplicates for the record,Customer details,Duplicity,duplicity,null
+1,,ProfitCenterTexts,PROFITCENTERID,PROFM_17.5,Check duplicates for the record,Profit details,Duplicity,duplicity,null
+1,,ProfitCenterHierarchy,HIERARCHYID,CUSTM_2.4,Check duplicates for the record,Profit details,Duplicity,duplicity,null
+1,,ProfitCenter,PROFITCENTERID,PROFM_17.5,Check duplicates for the record,Profit details,Duplicity,duplicity,null
+1,,ProductTexts,PRODUCTID,PRODM_16.3,Check duplicates for the record,Product details,Duplicity,duplicity,null
+1,,ProductCategoryTexts,PRODCATEGORYID,PRODM_13.4,Check duplicates for the record,Product details,Duplicity,duplicity,null
+1,,ProductCategories,PRODCATEGORYID,PRODM_13.4,Check duplicates for the record,Product details,Duplicity,duplicity,null
+1,,Product,PRODUCTID,PRODM_12.20,Check duplicates for the record,Product details,Duplicity,duplicity,null
+1,,GLAccountsTexts,ACCOUNTID,GLCOM_8.3,Check duplicates for the record,GL details,Duplicity,duplicity,null
+1,,GLAccounts,ACCOUNTID,GLCOM_8.3,Check duplicates for the record,GL details,Duplicity,duplicity,null
+1,,GLAccountsHierarchy,HIERARCHYID,CUSTM_2.4,Check duplicates for the record,GL details,Duplicity,duplicity,null
+1,,GLAccounts,"ACCOUNTID,ACCOUNTTYPEID,LANGUAGE",CUSTM_1.23,Length should be less than given length,GL details,Completeness,length,
+4,,Product,PRODUCTID,Product_PRODUCTID_special_character_,PRODUCTID should not contain special character,Product details,Conformity,special_character,
+4,,CustomersHierarchy,HIERARCHYID,CustomersHierarchy_HIERARCHYID_duplicity_,Check duplicates for the HIERARCHYID,Customer details,Duplicity,duplicity,
+4,,CustomersHierarchy,DESCRIPTION,CustomersHierarchy_DESCRIPTION_length_200,DESCRIPTION should be greater than 200,Customer details,Completeness,length,200
+5,,ProductCategoryTexts,"PRODCATEGORYID,LANGUAGE,SHORT_DESCR","ProductCategoryTexts_PRODCATEGORYID,LANGUAGE,SHORT_DESCR_length_12","PRODCATEGORYID, LANGUAGE, SHORT_DESCR should be less than ",Product details,Completeness,length,12
+7,,GLAccountsTexts,"LANGUAGE,MEDIUM_DESCR","GLAccountsTexts_LANGUAGE,MEDIUM_DESCR_length_25","LANGUAGE, MEDIUM_DESCR should be less than ",GL details,Completeness,length,25

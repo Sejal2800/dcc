@@ -1,0 +1,257 @@
+Rule number,Table name,Column name,Business rule definition,Functionality,DataType,Attribute_Group,Dimension
+CUSTM_1.1,Customer,CUSTOMERID,CustomerId should contain a number (alphanumeric) ,not_contain_number,Varchar,Customer details,Completeness
+CUSTM_1.2,Customer,CUSTOMERID,CustomerId should not contain special character,special_character,Varchar,Customer details,Completeness
+CUSTM_1.3,Customer,CUSTOMERID,CustomerID should not be null,,Varchar,Customer details,Completeness
+CUSTM_1.4,Customer,CUSTOMERID,Check duplicates for the record,Duplicity,Varchar,Customer details,Duplicity
+CUSTM_1.5,Customer,CUSTOMERTYPEID,Length should be only 2 charcater,fixed_length,Varchar,Customer details,Conformity
+CUSTM_1.6,Customer,CUSTOMERTYPEID,CustomerTypeID should not be null,,Varchar,Customer details,Completeness
+CUSTM_1.7,Customer,CUSTOMERTYPEID,CustomerTypeID should not contain special character,special_character,Varchar,Customer details,Completeness
+CUSTM_1.8,Customer,CUSTOMERTYPEID,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Customer details,Completeness
+CUSTM_1.9,Customer,COUNTRY,Country should not contain special character.,special_character,Varchar,Customer details,Completeness
+CUSTM_1.10,Customer,COUNTRY,Country should not be null,,Varchar,Customer details,Completeness
+CUSTM_1.11,Customer,COUNTRY,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Customer details,Completeness
+CUSTM_1.12,Customer,LANGUAGE,Language should not be null,,Varchar,Customer details,Completeness
+CUSTM_1.13,Customer,LANGUAGE,Default to 'EN',not_like,Varchar,Customer details,Completeness
+CUSTM_1.14,Customer,LANGUAGE,Default to 'CAPITALIZED',is_lower,Varchar,Customer details,Completeness
+CUSTM_1.15,Customer,CREATEDBY,Created by should not be null,,Integer,Customer details,Completeness
+CUSTM_1.16,Customer,CREATEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Customer details,Completeness
+CUSTM_1.17,Customer,CREATEDAT,Created at should not be null,,Dateformat,Customer details,Completeness
+CUSTM_1.18,Customer,CHANGEDBY,Changed by should not be null,,Integer,Customer details,Completeness
+CUSTM_1.19,Customer,CHANGEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Customer details,Completeness
+CUSTM_1.20,Customer,CHANGEDAT,ChangedAt at should not be null,,Varchar,Customer details,Completeness
+CUSTM_1.21,Customer,CUSTOMERID,Length should upto 8-10 characters,ranged_length,Varchar,Customer details,Conformity
+CUSTM_1.22,Customer,COUNTRY,Length should be 2 characters,fixed_length,Varchar,Customer details,Conformity
+CUSTM_1.23,Customer,LANGUAGE,Length should be 2 characters,fixed_length,Varchar,Customer details,Conformity
+CUSTM_2.1,CustomerHierarchy,HIERARCHYID,Hierarchyid should not contain special character.,special_character,Varchar,Customer details,Completeness
+CUSTM_2.2,CustomerHierarchy,HIERARCHYID,Hierarchyid should contain a number (alphanumeric) . ,not_contain_number,Varchar,Customer details,Completeness
+CUSTM_2.3,CustomerHierarchy,HIERARCHYID,Hierarchyid should not be null,,Varchar,Customer details,Completeness
+CUSTM_2.4,CustomerHierarchy,HIERARCHYID,Check duplicates for the record,Duplicity,Varchar,Customer details,Duplicity
+CUSTM_2.5,CustomerHierarchy,DESCRIPTION,Description should not be null,,Varchar,Customer details,Completeness
+CUSTM_2.6,CustomerHierarchy,LEVEL,Length should be 2 characters,fixed_length,Varchar,Customer details,Conformity
+CUSTM_2.7,CustomerHierarchy,LEVEL,Level should not be null,,Varchar,Customer details,Completeness
+CUSTM_3.1,CustomerTexts,CUSTOMERID,CustomerId should contain a number (alphanumeric) . ,not_contain_number,Varchar,Customer details,Completeness
+CUSTM_3.2,CustomerTexts,CUSTOMERID,CustomerId  should not contain special character.,special_character,Varchar,Customer details,Completeness
+CUSTM_3.3,CustomerTexts,CUSTOMERID,CustomerID should not be null,,Varchar,Customer details,Completeness
+CUSTM_3.4,CustomerTexts,CUSTOMERID,Check duplicates for the record,Duplicity,Varchar,Customer details,Duplicity
+CUSTM_3.5,CustomerTexts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Customer details,Completeness
+CUSTM_3.6,CustomerTexts,LANGUAGE,Language should not be null,,Varchar,Customer details,Completeness
+CUSTM_3.7,CustomerTexts,MEDIUM_DESCR,Medium_descr should not be null,,Varchar,Customer details,Completeness
+CUSTM_3.8,CustomerTexts,SHORT_DESCR,Short_descr should not be null,,Varchar,Customer details,Completeness
+CUSTM_3.9,CustomerTexts,LONG_DESCR,Long_descr should not be null,,Varchar,Customer details,Completeness
+CUSTM_3.10,CustomerTexts,LANGUAGE,default to 'EN',not_like,Varchar,Customer details,Completeness
+CUSTM_4.1,CustomerType,CUSTOMERTYPEID,CustomerId should contain a number (alphanumeric) . ,not_contain_number,Varchar,Customer details,Completeness
+CUSTM_4.2,CustomerType,CUSTOMERTYPEID,Length should be only 2 charcater,fixed_length,Varchar,Customer details,Conformity
+CUSTM_4.3,CustomerType,CUSTOMERTYPEID,CustomerId should not be null,,Varchar,Customer details,Completeness
+CUSTM_4.4,CustomerType,CUSTOMERTYPEID,Check duplicates for the record,Duplicity,Varchar,Customer details,Duplicity
+CUSTM_4.5,CustomerType,LANGUAGE,Language should not be null,,Varchar,Customer details,Completeness
+CUSTM_4.6,CustomerType,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Customer details,Completeness
+CUSTM_4.7,CustomerType,CREATEDBY,Created by should not be null,,Integer,Customer details,Completeness
+CUSTM_4.8,CustomerType,CREATEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Customer details,Completeness
+CUSTM_4.9,CustomerType,CREATEDAT,Created at should not be null,,Dateformat,Customer details,Completeness
+CUSTM_4.10,CustomerType,CHANGEDBY,Changed by should not be null,,Integer,Customer details,Completeness
+CUSTM_4.11,CustomerType,CHANGEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Customer details,Completeness
+CUSTM_4.12,CustomerType,CHANGEDAT,Changed at should not be null,,Dateformat,Customer details,Completeness
+CUSTM_4.13,CustomerType,LANGUAGE,Length should be of 2 character,fixed_length,Varchar,Customer details,Conformity
+CUSTM_5.1,CustomerTypeTexts,CUSTOMERTYPEID,CustomerTypeID should not be null,,Varchar,Customer details,Completeness
+CUSTM_5.2,CustomerTypeTexts,CUSTOMERTYPEID,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Customer details,Completeness
+CUSTM_5.3,CustomerTypeTexts,CUSTOMERTYPEID,Length should upto 2 characters,fixed_length,Varchar,Customer details,Conformity
+CUSTM_5.4,CustomerTypeTexts,CUSTOMERTYPEID,Check duplicates for the record,Duplicity,Varchar,Customer details,Duplicity
+CUSTM_5.5,CustomerTypeTexts,LANGUAGE,Language should not be null,,Varchar,Customer details,Completeness
+CUSTM_5.6,CustomerTypeTexts,SHORT_DESCR,Short_descr should not be null,,Varchar,Customer details,Completeness
+CUSTM_5.7,CustomerTypeTexts,SHORT_DESCR,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Customer details,Completeness
+CUSTM_5.8,CustomerTypeTexts,MEDIUM_DESCR,Medium_descr should not be null,,Varchar,Customer details,Completeness
+CUSTM_5.9,CustomerTypeTexts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Customer details,Completeness
+CUSTM_5.10,CustomerTypeTexts,LONG_DESCR,Long_descr should not be null,,Varchar,Customer details,Completeness
+CUSTM_5.11,CustomerTypeTexts,LANGUAGE,default to 'EN',fixed_length,Varchar,Customer details,Conformity
+FINANM_6.1,FinancialTransactions,TRANSACTIONID,TransactionID should be a number.,is_numeric,Integer,Finance  details,Completeness
+FINANM_6.2,FinancialTransactions,TRANSACTIONID,"TransactionID should not be ""NULL.",,Integer,Finance  details,Completeness
+FINANM_6.3,FinancialTransactions,TRANSACTIONID,Check duplicates for the record,Duplicity,Varchar,Finance  details,Duplicity
+FINANM_6.4,FinancialTransactions,DATE,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Finance  details,Completeness
+FINANM_6.5,FinancialTransactions,DATE,Date should not be null,,Dateformat,Finance  details,Completeness
+FINANM_6.6,FinancialTransactions,VALUE,Value should not be null,,Integer,Finance  details,Completeness
+FINANM_6.7,FinancialTransactions,ACCOUNTID,AccountID should not be null,,Varchar,Finance  details,Completeness
+FINANM_6.8,FinancialTransactions,ACCOUNTID,"It should start with ""FPA""",start_with,Varchar,Finance  details,Completeness
+FINANM_6.9,FinancialTransactions,ACCOUNTTYPEID,AccountTypeID should not be null,,Integer,Finance  details,Completeness
+FINANM_6.10,FinancialTransactions,ACCOUNTTYPEID,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Finance  details,Completeness
+FINANM_6.11,FinancialTransactions,CUSTOMERID,CustomerId should not contain special character,special_character,Varchar,Finance  details,Completeness
+FINANM_6.12,FinancialTransactions,CUSTOMERID,CustomerId should contain a number (alphanumeric) . ,not_contain_number,Varchar,Finance  details,Completeness
+FINANM_6.13,FinancialTransactions,CUSTOMERID,CustomerID should not be null,,Varchar,Finance  details,Completeness
+FINANM_6.14,FinancialTransactions,CUSTOMERTYPEID,CustomerTypeId Must not be blank,,Varchar,Finance  details,Completeness
+FINANM_6.15,FinancialTransactions,CUSTOMERTYPEID,Length should be only two charcater,fixed_length,Varchar,Finance  details,Conformity
+FINANM_6.16,FinancialTransactions,CUSTOMERTYPEID,CustomerTypeId should not contain special character,special_character,Varchar,Finance  details,Completeness
+FINANM_6.17,FinancialTransactions,PRODUCTID,ProductID should not contain special character,special_character,Varchar,Finance  details,Completeness
+FINANM_6.18,FinancialTransactions,PRODUCTID,ProductID should not be null,,Varchar,Finance  details,Completeness
+FINANM_6.19,FinancialTransactions,PRODUCTCATEGORYID,ProductCategoryID should not contain special character,special_character,Varchar,Finance  details,Completeness
+FINANM_6.20,FinancialTransactions,PRODUCTCATEGORYID,Length should be only two charcater,fixed_length,Varchar,Finance  details,Conformity
+FINANM_6.21,FinancialTransactions,PRODUCTCATEGORYID,ProductCategoryID should not be null,,Varchar,Finance  details,Completeness
+FINANM_6.22,FinancialTransactions,PROFITCENTERID,ProfitCenterID should not be null,,Varchar,Finance  details,Completeness
+FINANM_6.23,FinancialTransactions,VERSION,Version should not be null,,Varchar,Finance  details,Completeness
+FINANM_6.24,FinancialTransactions,TRANSACTIONID,Length should be upto 10 character.,ranged_length,Varchar,Finance  details,Conformity
+GLCOM_7.1,GLAccountHierarchy,HIERARCHYID,Hierarchyid should not be null,,Varchar,GL details,Completeness
+GLCOM_10.3,GLAccountType,ACCOUNTTYPEID,Check duplicates for the record,Duplicity,Varchar,GL details,Duplicity
+GLCOM_7.3,GLAccountHierarchy,HIERARCHYID,Hierarchyid should start with 'FPA',start_with,Varchar,GL details,Completeness
+GLCOM_7.4,GLAccountHierarchy,LEVEL,Level should start with 'FPA',start_with,Varchar,GL details,Completeness
+GLCOM_7.5,GLAccountHierarchy,DESCRIPTION,Description should not be null,,Varchar,GL details,Completeness
+GLCOM_7.6,GLAccountHierarchy,LEVEL,Level should not be null,,Varchar,GL details,Completeness
+GLCOM_8.1,GLAccounts,ACCOUNTID,AccountID should not be null,,Varchar,GL details,Completeness
+GLCOM_8.2,GLAccounts,ACCOUNTID,AccountID should start with 'FPA',start_with,Varchar,GL details,Completeness
+GLCOM_11.3,GLAccountTypeTexts,ACCOUNTTYPEID,Check duplicates for the record,Duplicity,Varchar,GL details,Duplicity
+GLCOM_8.4,GLAccounts,ACCOUNTTYPEID,AccountTypeID should not be null,,Varchar,GL details,Completeness
+GLCOM_8.5,GLAccounts,ACCOUNTTYPEID,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,GL details,Completeness
+GLCOM_8.6,GLAccounts,LANGUAGE,Language should not be null,,Varchar,GL details,Completeness
+GLCOM_8.7,GLAccounts,LANGUAGE,Defaulted to 'EN',not_like,Varchar,GL details,Completeness
+GLCOM_8.8,GLAccounts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,GL details,Completeness
+GLCOM_8.9,GLAccounts,CREATEDBY,Created by should not be null,,integer,GL details,Completeness
+GLCOM_8.10,GLAccounts,CREATEDAT,Createdat should not be null,,Dateformat,GL details,Completeness
+GLCOM_8.11,GLAccounts,CHANGEDBY,Changed by should not be null,,Integer,GL details,Completeness
+GLCOM_8.12,GLAccounts,CREATEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,GL details,Completeness
+GLCOM_8.13,GLAccounts,CHANGEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,GL details,Completeness
+GLCOM_8.14,GLAccounts,CHANGEDAT,Change at should not be null,,Dateformat,GL details,Completeness
+GLCOM_8.15,GLAccounts,ACCOUNTTYPEID,Length should be upto 3 characters,ranged_length,Varchar,GL details,Conformity
+GLCOM_8.16,GLAccounts,LANGUAGE,Length should be upto 2 characters,ranged_length,Varchar,GL details,Conformity
+GLCOM_9.1,GLAccountsTexts,ACCOUNTID,AccountID should not be null,,Varchar,GL details,Completeness
+GLCOM_9.2,GLAccountsTexts,ACCOUNTID,AccountID should start with 'FPA',start_with,Varchar,GL details,Completeness
+GLCOM_7.2,GLAccountHierarchy,HIERARCHYID,Check duplicates for the record,Duplicity,Varchar,GL details,Duplicity
+GLCOM_9.4,GLAccountsTexts,LANGUAGE,Language should not be null,,Varchar,GL details,Completeness
+GLCOM_9.5,GLAccountsTexts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,GL details,Completeness
+GLCOM_9.6,GLAccountsTexts,SHORT_DESCR,Short_descr should not be null,,Varchar,GL details,Completeness
+GLCOM_9.7,GLAccountsTexts,MEDIUM_DESCR,Medium_descr should not be null,,Varchar,GL details,Completeness
+GLCOM_9.8,GLAccountsTexts,LONG_DESCR,Long_descr should not be null,,Varchar,GL details,Completeness
+GLCOM_9.9,GLAccountsTexts,LANGUAGE,Defaulted to 'EN',ranged_length,Varchar,GL details,Conformity
+GLCOM_10.1,GLAccountType,ACCOUNTTYPEID,AccountTypeID should not be null,,Varchar,GL details,Completeness
+GLCOM_10.2,GLAccountType,ACCOUNTTYPEID,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,GL details,Completeness
+GLCOM_8.3,GLAccounts,ACCOUNTID,Check duplicates for the record,Duplicity,Varchar,GL details,Duplicity
+GLCOM_10.4,GLAccountType,LANGUAGE,Language should not be null,,Varchar,GL details,Completeness
+GLCOM_10.5,GLAccountType,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,GL details,Completeness
+GLCOM_10.6,GLAccountType,CREATEDBY,Created by should not be null,,Integer,GL details,Completeness
+GLCOM_10.7,GLAccountType,CREATEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,GL details,Completeness
+GLCOM_10.8,GLAccountType,CREATEDAT,Created at should not be null,,Dateformat,GL details,Completeness
+GLCOM_10.9,GLAccountType,CHANGEDBY,Changed by should not be null,,Integer,GL details,Completeness
+GLCOM_10.10,GLAccountType,CHANGEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,GL details,Completeness
+GLCOM_10.11,GLAccountType,CHANGEDAT,Changed at should not be null,,Dateformat,GL details,Completeness
+GLCOM_10.12,GLAccountType,ACCOUNTTYPEID,Length should be in range of 2-4 characters ,ranged_length,Varchar,GL details,Conformity
+GLCOM_10.13,GLAccountType,LANGUAGE,Defaulted to 'EN',ranged_length,Varchar,GL details,Conformity
+GLCOM_11.1,GLAccountTypeTexts,ACCOUNTTYPEID,AccountTypeID should not be null,,Varchar,GL details,Completeness
+GLCOM_11.2,GLAccountTypeTexts,ACCOUNTTYPEID,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,GL details,Completeness
+GLCOM_9.3,GLAccountsTexts,ACCOUNTID,Check duplicates for the record,Duplicity,Varchar,GL details,Duplicity
+GLCOM_11.4,GLAccountTypeTexts,LANGUAGE,Language should not be null,,Varchar,GL details,Completeness
+GLCOM_11.5,GLAccountTypeTexts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,GL details,Completeness
+GLCOM_11.6,GLAccountTypeTexts,SHORT_DESCR,Short_descr should not be null,,Varchar,GL details,Completeness
+GLCOM_11.7,GLAccountTypeTexts,MEDIUM_DESCR,Medium_Descr should not be null,,Varchar,GL details,Completeness
+GLCOM_11.8,GLAccountTypeTexts,LONG_DESCR,Long_descr should not be null,,Varchar,GL details,Completeness
+GLCOM_11.9,GLAccountTypeTexts,LANGUAGE,Defaulted to 'EN',ranged_length,Varchar,GL details,Conformity
+PRODM_12.1,Product,CHANGEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Product details,Completeness
+PRODM_12.2,Product,CHANGEDAT,Changed at should not be null,,Dateformat,Product details,Completeness
+PRODM_12.3,Product,CHANGEDBY,Changed by should not be null,,Integer,Product details,Completeness
+PRODM_12.4,Product,CREATEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Product details,Completeness
+PRODM_12.5,Product,CREATEDAT,Createdat should not be null,,Dateformat,Product details,Completeness
+PRODM_12.6,Product,CREATEDBY,Createdby should not be null,,Integer,Product details,Completeness
+PRODM_12.7,Product,CURRENCY,"Currency Default Value  as ""USD"".",not_like,Varchar,Product details,Completeness
+PRODM_12.8,Product,CURRENCY,Currency should not be null.,,Varchar,Product details,Completeness
+PRODM_12.9,Product,DEPTH,"Depth should be  Default Value as  ""0.000""",not_like,Float,Product details,Completeness
+PRODM_12.10,Product,DIMENSIONUNIT,"Dimensionunit should be Default Value as ""metre""",not like,Varchar,Product details,Completeness
+PRODM_12.11,Product,DIMENSIONUNIT,Dimensionunit Should not be null,,Float,Product details,Completeness
+PRODM_12.12,Product,HEIGHT,"Height should be Default Value as  ""0.000""",not_like,Float,Product details,Completeness
+PRODM_12.13,Product,LANGUAGE,Default to 'CAPITALIZED',is_lower,Float,Product details,Completeness
+PRODM_12.14,Product,LANGUAGE,Default to 'EN',not_like,Char,Product details,Completeness
+PRODM_12.15,Product,LANGUAGE,Language should not be null.,,Char,Product details,Completeness
+PRODM_12.16,Product,PRICE, Price should not be null.,,Varchar,Product details,Completeness
+PRODM_12.17,Product,PRICE,Price should contain only numbers.,is_not_numeric,Varchar,Product details,Completeness
+PRODM_12.18,Product,PRODUCTID,Should be in length of 8 to 10 characters,ranged_length,Varchar,Product details,Completeness
+PRODM_12.19,Product,PRODUCTID,Product id should not be null.,,Varchar,Product details,Completeness
+PRODM_12.20,Product,PRODUCTID,Check duplicates for the record,Duplicity,Varchar,Product details,Duplicity
+PRODM_12.21,Product,PRODUCTCATEGORYID,Length should be upto 2 character.,fixed_length,Varchar,Product details,Completeness
+PRODM_12.22,Product,PRODUCTCATEGORYID,Default to 'Capitalized',is_numeric,Varchar,Product details,Completeness
+PRODM_12.23,Product,PRODUCTCATEGORYID,Product Category ID should not be null,,Varchar,Product details,Completeness
+PRODM_12.24,Product,PRODUCTCATEGORYID,Product Category ID should not contain special charcter,special_character,Varchar,Product details,Completeness
+PRODM_12.25,Product,PRODUCTPICURL,ProductPicURL should not be null,,String,Product details,Completeness
+PRODM_12.26,Product,QUANTITYUNIT," QuantityUnit  Default Value as ""EA"".",not like,Varchar,Product details,Completeness
+PRODM_12.27,Product,QUANTITYUNIT,QuantityUnit should not be null.,,Varchar,Product details,Completeness
+PRODM_12.28,Product,SUPPLIER_PARTNERID,Supplier_PartnerID should not be null.,,Integer,Product details,Completeness
+PRODM_12.29,Product,SUPPLIER_PARTNERID,Supplier_PartnerID should contain only numbers.,is_not_numeric,Integer,Product details,Completeness
+PRODM_12.30,Product,SUPPLIER_PARTNERID,Supplier_PartnerID length should be10 characters.,fixed_length,Integer,Product details,Conformity
+PRODM_12.31,Product,TAXTARIFFCODE,"TaxTariffCode Default Value as ""1"".",not like,Varchar,Product details,Completeness
+PRODM_12.32,Product,TAXTARIFFCODE,TaxTariffCode should not be null.,,Varchar,Product details,Completeness
+PRODM_12.33,Product,TYPECODE,"Type code should be Default Value  as ""PR"".",not like,Char,Product details,Completeness
+PRODM_12.34,Product,TYPECODE,Type code should not be null or null.,,Char,Product details,Completeness
+PRODM_12.35,Product,WEIGHTMEASURE,WeightMeasure should not be null.,,Integer,Product details,Completeness
+PRODM_12.36,Product,WEIGHTMEASURE,WeightMeasure should contain only numbers.,is_not_numeric,Integer,Product details,Completeness
+PRODM_12.37,Product,WEIGHTUNIT,"WeightUnit should be Default Value as ""KG"".",not like,Varchar,Product details,Completeness
+PRODM_12.38,Product,WEIGHTUNIT,WeightUnit  should not be null.,,Varchar,Product details,Completeness
+PRODM_12.39,Product,WIDTH,"Width Default Value as  ""0.000""",not like,Float,Product details,Completeness
+PRODM_12.40,Product,WIDTH,Width should not be null.,,Float,Product details,Completeness
+PRODM_13.1,ProductCategories,PRODCATEGORYID,"Defaulted to ""CAPITALIZED""",is_lower,Integer,Product details,Completeness
+PRODM_13.2,ProductCategories,PRODCATEGORYID,ProductCategoryID should not be null.,,Integer,Product details,Completeness
+PRODM_13.3,ProductCategories,PRODCATEGORYID,ProductCategoryID should not contain special character,special_character,Integer,Product details,Completeness
+PRODM_13.4,ProductCategories,PRODCATEGORYID,Check duplicates for the record,Duplicity,Varchar,Product details,Duplicity
+PRODM_13.5,ProductCategories,LANGUAGE,Language should not be null,,Varchar,Product details,Completeness
+PRODM_13.6,ProductCategories,LANGUAGE,"Defaulted to ""EN""",not_like,Varchar,Product details,Completeness
+PRODM_13.7,ProductCategories,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Product details,Completeness
+PRODM_13.8,ProductCategories,CREATEDBY,Created by should not be null,,Integer,Product details,Completeness
+PRODM_13.9,ProductCategories,CREATEDAT,"Date should be in ""YYYYMMDD"" format",date_format,Integer,Product details,Completeness
+PRODM_13.10,ProductCategories,CREATEDAT,Created at  should not be null,,Integer,Product details,Completeness
+PRODM_13.11,ProductCategories,CHANGEDBY,Changed by should not be null,,Varchar,Product details,Completeness
+PRODM_13.12,ProductCategories,CHANGEDAT,"Date should be in ""YYYYMMDD"" format",date_format,Varchar,Product details,Completeness
+PRODM_13.13,ProductCategories,CHANGEDAT,Changed at should not be null,,Varchar,Product details,Completeness
+PRODM_14.1,ProductCategoryTexts,PRODCATEGORYID,,is_lower,Integer,Product details,Completeness
+PRODM_14.2,ProductCategoryTexts,PRODCATEGORYID,ProductCategoryID should not be null.,,Integer,Product details,Completeness
+PRODM_14.3,ProductCategoryTexts,PRODCATEGORYID,ProductCategoryID should not contain special character,special_character,Integer,Product details,Completeness
+PRODM_14.4,ProductCategoryTexts,PRODCATEGORYID,Check duplicates for the record,Duplicity,Varchar,Product details,Duplicity
+PRODM_14.5,ProductCategoryTexts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Product details,Completeness
+PRODM_14.6,ProductCategoryTexts,SHORT_DESCR,Short_Descr should not be null,,Varchar,Product details,Completeness
+PRODM_14.7,ProductCategoryTexts,MEDIUM_DESCR,Medium_descr should not be null,,Varchar,Product details,Completeness
+PRODM_14.8,ProductCategoryTexts,LONG_DESCR,Long_descr should not be null,,Varchar,Product details,Completeness
+PRODM_14.9,ProductCategoryTexts,LANGUAGE,Language should not be null,ranged_length,Varchar,Product details,Conformity
+PRODM_14.10,ProductCategoryTexts,LANGUAGE,"Defaulted to ""EN""",,Varchar,Product details,Conformity
+PRODM_15.1,ProductHierarchy,HIERARCHYID,Hierarchyid should not be null.,,Varchar,Product details,Completeness
+PRODM_15.2,ProductHierarchy,HIERARCHYID,Check duplicates for the record,Duplicity,Varchar,Product Details,Duplicity
+PRODM_15.3,ProductHierarchy,DESCRIPTION ,Description should not be null or null.,,Varchar,Product details,Completeness
+PRODM_15.4,ProductHierarchy,Level,Level should not contain numbers.,not_contain_number,Varchar,Product details,Completeness
+PRODM_15.5,ProductHierarchy,DESCRIPTION,Description should not contain special character,special_character,Varchar,Product details,Conformity
+PRODM_15.6,ProductHierarchy,Level,Level should start with 'Z',start_with,Varchar,Product details,Conformity
+PRODM_16.1,ProductTexts,PRODUCTID,Product ID should not be null,,Integer,Product details,Completeness
+PRODM_16.2,ProductTexts,PRODUCTID,Length should be in range of 7-10,ranged_length,Integer,Product details,Completeness
+PRODM_16.3,ProductTexts,PRODUCTID,Check duplicates for the record,Duplicity,Varchar,Product details,Duplicity
+PRODM_16.4,ProductTexts,LANGUAGE,"Defaulted to ""EN""",contain_number,Varchar,Product details,Completeness
+PRODM_16.5,ProductTexts,LANGUAGE,Language should not be null,,Varchar,Product details,Completeness
+PRODM_16.6,ProductTexts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Product details,Completeness
+PRODM_16.7,ProductTexts,SHORT_DESCR,Short_Descr should  not be null,,Varchar,Product details,Completeness
+PRODM_16.8,ProductTexts,MEDIUM_DESCR,Medium_Descr should  not be null,,Varchar,Product details,Completeness
+PRODM_16.9,ProductTexts,LONG_DESCR,Long_descr should not be null,,Varchar,Product details,Completeness
+PROFM_17.1,ProfitCenter,PROFITCENTERID,Length should be of 7-10 characters,ranged_length,Varchar,Profit details,Completeness
+PROFM_17.2,ProfitCenter,PROFITCENTERID,ProfitCenterID should contain a number (alphanumeric) .,not_contain_number,Varchar,Profit details,Completeness
+PROFM_17.3,ProfitCenter,PROFITCENTERID,Should not contain special characters,special_character,Varchar,Profit details,Completeness
+PROFM_17.4,ProfitCenter,PROFITCENTERID,ProfitCenterID should not be null,,Varchar,Profit details,Completeness
+PROFM_17.5,ProfitCenter,PROFITCENTERID,Check duplicates for the record,Duplicity,Varchar,Profit details,Duplicity
+PROFM_17.6,ProfitCenter,LANGUAGE,Language should not be null,,Varchar,Profit details,Completeness
+PROFM_17.7,ProfitCenter,LANGUAGE,"Defaulted to ""EN""",not_like,Varchar,Profit details,Conformity
+PROFM_17.8,ProfitCenter,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Profit details,Completeness
+PROFM_17.9,ProfitCenter,CREATEDBY,Created by should not be null,,Integer,Profit details,Completeness
+PROFM_17.10,ProfitCenter,CREATEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Profit details,Completeness
+PROFM_17.11,ProfitCenter,CREATEDAT,Created at should not be null,,Dateformat,Profit details,Completeness
+PROFM_17.12,ProfitCenter,CHANGEDBY,Changed by should not be null,,Integer,Profit details,Completeness
+PROFM_17.13,ProfitCenter,CHANGEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Profit details,Completeness
+PROFM_17.14,ProfitCenter,CHANGEDAT,Changed at should not be null,,Dateformat,Profit details,Completeness
+PROFM_18.1,ProfitCenterHierarchy,HIERARCHYID,Hierarchyid should not contain special character,,Varchar,Profit details,Completeness
+PROFM_18.2,ProfitCenterHierarchy,HIERARCHYID,Hierarchyid should not be null,,Varchar,Profit details,Completeness
+PROFM_18.3,ProfitCenterHierarchy,HIERARCHYID,Check duplicates for the record,Duplicity,Varchar,Profit details,Duplicity
+PROFM_18.4,ProfitCenterHierarchy,DESCRIPTION,Description should not be null,,Varchar,Profit details,Completeness
+PROFM_18.5,ProfitCenterHierarchy,HIERARCHYID,Description should not contain special character,,Varchar,Profit details,Completeness
+PROFM_18.6,ProfitCenterHierarchy,HIERARCHYID,Level should not contain special character,,Varchar,Profit details,Completeness
+PROFM_18.7,ProfitCenterHierarchy,LEVEL,Level should not be null,,Varchar,Profit details,Completeness
+PROFM_19.1,ProfitCenterTexts,PROFITCENTERID,Length should be of 7-10 characters,ranged_length,Varchar,Profit details,Completeness
+PROFM_19.2,ProfitCenterTexts,PROFITCENTERID,ProfitCenterID should contain a number (alphanumeric) .,not_contain_number,Varchar,Profit details,Completeness
+PROFM_19.3,ProfitCenterTexts,PROFITCENTERID,"ProfitCenterID should not be ""NULL.",,Varchar,Profit details,Completeness
+PROFM_19.4,ProfitCenterTexts,PROFITCENTERID,Should not contain special characters,special_character,Varchar,Profit details,Completeness
+PROFM_19.5,ProfitCenterTexts,PROFITCENTERID,Check duplicates for the record,Duplicity,Varchar,Profit details,Duplicity
+PROFM_19.6,ProfitCenterTexts,LANGUAGE,"Defaulted to ""EN""",not_like,Varchar,Profit details,Completeness
+PROFM_19.7,ProfitCenterTexts,LANGUAGE,Language should not be null .,,Varchar,Profit details,Completeness
+PROFM_19.8,ProfitCenterTexts,LANGUAGE,"Defaulted to ""CAPITALIZED""",is_lower,Varchar,Profit details,Completeness
+PROFM_19.9,ProfitCenterTexts,SHORT_DESCR,Short_Decsr should not be null,,Varchar,Profit details,Completeness
+PROFM_19.10,ProfitCenterTexts,MEDIUM_DESCR,Medium_descr should not be null,,Varchar,Profit details,Completeness
+PROFM_19.11,ProfitCenterTexts,LONG_DESCR,Long_descr should not be null,,Varchar,Profit details,Completeness
+CUSTM_1.18,Customer,CREATEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Customer_details,Inactivity
+CUSTM_1.22,Customer,CHANGEDAT,"It should be in Dateformat ""YYYYMMDD""",date_format,Dateformat,Customer_details,Inactivity
+FINANM_6.6,FinancialTransactions,DATE,"It should be in Dateformat ""YYYYMDD""",date_format,Dateformat,Finance details,Inactivity
+CUST_2.0,Customer,COUNTRY,Country should be null,custom_rule,varchar,Customer details,custom
+CUST_2.1,Customer,COUNTRY,country should be null,custom_rule,varchar,Customer details,custom

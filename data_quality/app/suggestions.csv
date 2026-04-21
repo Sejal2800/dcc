@@ -1,0 +1,52 @@
+Table_Name,Column_Name,Rule,Timestamp
+Customer,Language,Length shoud be 3,
+Customer,Language,Should be in capital,
+Customer,language,should not be null,
+tbl,col,col is null,
+customer,language,"language should not be null, show records if any null found",
+customer,language,"language should not be null, if any retrun the records
+",
+customer,language,"language should not be null, if any retrun the records
+",
+customer,language,"language should not contain null values, return records if any",
+customer,language,"language should not be null, print records if any",
+customer,language,"language should not be null, print records if any",
+Customer,Language,Values should not contain spaces,
+Customer,Language,"Language col should not contain spaces, return records if any found",
+Customer,Language,language should not be null,
+Customer,Language,"Language col should not contain spaces, return records if any found",
+Customer,Language,Language should not contain null values,
+Customer,Language,"Language col should not contain spaces, return records if any found",
+customer,language,language col should not contain null values,
+customer,language,language should not be null,
+customer,language,language should not be null,
+customer,language,language should not be null,
+customer,language,should not have 'd' in record,
+customer,language,should not have 'd' in record,
+customer,country,should not have 'd' in record,
+customer,country,should have 'd' in record,
+customer,country,value should not contain 'd',
+customer,country,value should contain 'd',
+customer,country,country should not contain 'd',
+customer,country,values should not contain 'd',
+customer,country,coutry language should not be null,22-01-2026 14:35
+customer,country,country should not contain 'd',22-01-2026 14:44
+customer,country,country should contain 'd',22-01-2026 14:45
+customertype,language,language should not be in capital,2026-01-22 17:08:40.039476
+customertype,language,language should be in capital,2026-01-22 17:08:56.472086
+customertype,language,language should be in capital,2026-01-22 17:11:52.096089
+customertype,language,language should be in capital,2026-01-22 17:12:01.119394
+customertype,language,language should be in capital,2026-01-22 17:12:43.698214
+customertype,language,language should not be in capital,2026-01-22 17:13:05.699245
+Customer,COUNTRY,country should not be null,2026-01-23 14:58:34.288300
+Customer,COUNTRY,country should be null,2026-01-23 14:59:38.302133
+Customer,COUNTRY,Country should not be null,2026-01-24 13:11:00.072943
+Customer,COUNTRY,Country should be null,2026-01-24 13:11:14.027301
+Customer,COUNTRY,Country should be null,2026-01-24 13:14:31.836281
+Customer,COUNTRY,country should be null,2026-01-24 13:15:02.500550
+Customer,COUNTRY,country should be null,2026-01-24 13:22:22.702743
+Customer,COUNTRY,country should be null,2026-01-24 13:22:47.606854
+Customer,COUNTRY,Country should be null,2026-01-24 14:12:03.275365
+Customer,COUNTRY,Country should be null,2026-01-24 14:12:07.212803
+Customer,COUNTRY,country should be null,2026-01-24 14:28:44.913249
+Customer,COUNTRY,country should be null,2026-01-24 14:28:48.323540
