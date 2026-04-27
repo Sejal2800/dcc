@@ -211,12 +211,23 @@
             </div>
 
             <div id="otp-step-2" style="display: none;" class="mt-3 border-top pt-3">
-                <p class="small text-success">OTP Sent! Please check your email.</p>
-                <input id="fp_otp" class="form-control mb-3" placeholder="Enter 6-Digit OTP">
-                <input id="fp_password" type="password" class="form-control mb-3" placeholder="New Password">
-                <button class="btn btn-success w-100" onclick="verifyOTP()" style="border-radius: 25px;">
-                    Verify & Update Password
-                </button>
+            <p class="small text-success">OTP Sent! Please check your email.</p>
+
+            <input id="fp_otp" class="form-control mb-3" placeholder="Enter 6-Digit OTP">
+            <input id="fp_password" type="password" class="form-control mb-3" placeholder="New Password">
+
+            <button class="btn btn-success w-100 mb-2" onclick="verifyOTP()" style="border-radius: 25px;">
+                Verify & Update Password
+            </button>
+
+            <!-- ✅ RESEND BUTTON -->
+            <div class="text-center">
+                <a href="#" id="resendLink" onclick="resendOTP()" style="color:gray; pointer-events:none;">
+                Resend OTP
+            </a>
+
+            <div id="timerText">Resend available in 60s</div>
+            </div>
             </div>
             
             <button type="button" class="btn btn-link btn-sm text-white mt-3" data-bs-dismiss="modal">Cancel</button>
@@ -225,6 +236,38 @@
 </div>
 
 <script>
+let countdownTimer = null;
+let timeLeft = 60;
+
+function startResendTimer() {
+    const resendLink = document.getElementById("resendLink");
+    const timerText = document.getElementById("timerText");
+
+    // Clear any previous timer (IMPORTANT FIX)
+    if (countdownTimer) {
+        clearInterval(countdownTimer);
+    }
+
+    timeLeft = 60;
+
+    resendLink.style.pointerEvents = "none";
+    resendLink.style.color = "gray";
+
+    timerText.innerText = `Resend available in ${timeLeft}s`;
+
+    countdownTimer = setInterval(() => {
+        timeLeft--;
+
+        if (timeLeft > 0) {
+            timerText.innerText = `Resend available in ${timeLeft}s`;
+        } else {
+            clearInterval(countdownTimer);
+            resendLink.style.pointerEvents = "auto";
+            resendLink.style.color = "#00ffc8";
+            timerText.innerText = "You can now resend OTP";
+        }
+    }, 1000);
+}
     function goHome() {
     window.location.href = "/";
 }
@@ -244,21 +287,45 @@
     })
     .then(res => res.json())
     .then(data => {
-        // Updated logic to catch various success formats
-        if (data.success || data.status === "otp_sent" || data.status === "success") {
-            // Smoothly transition the modal content
+        if (data.status === "success") {
+
             document.getElementById('otp-step-1').style.display = 'none';
             document.getElementById('otp-step-2').style.display = 'block';
+
+            startResendTimer(); // ✅ START TIMER HERE
+
         } else {
-            alert(data.message || "User not found or error sending mail.");
+            alert(data.message || "Error sending OTP.");
+        }
+    });
+}
+function resendOTP() {
+    const username = document.getElementById('fp_username').value;
+
+    if(!username) {
+        alert("Enter username first");
+        return;
+    }
+
+    fetch('/send_otp', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username: username })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === "success") {
+            alert("New OTP sent to your email!");
+            startResendTimer(); 
+        } else {
+            alert(data.message || "Failed to resend OTP");
         }
     })
     .catch(err => {
         console.error(err);
-        alert("Server error. Please try again later.");
+        alert("Server error");
     });
 }
-
 function verifyOTP() {
     const username = document.getElementById('fp_username').value;
     const otp = document.getElementById('fp_otp').value;

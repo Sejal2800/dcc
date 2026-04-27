@@ -83,18 +83,18 @@ def create_user_from_request(request_id,role):
     hashed_password = generate_password_hash(temp_password)
 
     cursor.execute("""
-        INSERT INTO portal_users (username, email, password, role,must_reset_password)
-        VALUES (?, ?, ?, ?, ?)
-    """, (user.name, user.email, hashed_password, role,1))
+        INSERT INTO portal_users (username, email, password, role, must_reset_password, password_hash)
+        VALUES (?, ?, ?,?, ?, ?)
+    """, (user.name, user.email, temp_password, role,1, hashed_password))
 
     cursor.execute("UPDATE user_requests SET status='approved' WHERE id=?", (request_id,))
 
     temp_conn.commit()
     temp_conn.close()
 
-    send_email(user.email, temp_password)
+    send_email(user.email, temp_password, user.name)
 
-def send_email(to_email, password):
+def send_email(to_email, password, user_name):
     
 
     msg = Message(
@@ -113,7 +113,7 @@ def send_email(to_email, password):
             <p>Your account has been successfully created.</p>
 
             <h3>Login Credentials:</h3>
-            <p><b>Username:</b> {to_email}</p>
+            <p><b>Username:</b> {user_name}</p>
             <p><b>Temporary Password:</b> {password}</p>
 
             <p style="color:red;"><b>⚠ You must reset your password on first login.</b></p>
@@ -666,27 +666,31 @@ def login():
         cursor = temp_conn.cursor()
 
         cursor.execute(
-            "SELECT Username, email, password_hash, must_reset_password, role FROM portal_users WHERE Username = ?",
-            (username,)
+        "SELECT Username, email, password, must_reset_password, role FROM portal_users WHERE Username = ?",
+        (username,)
         )
+
         user = cursor.fetchone()
-        print("USER DATA:", user)
-        print("ROLE FROM DB:", user.role)
+
         if user is None:
             flash("User does not exist")
             return render_template('login.html')
 
-        if not check_password_hash(user.password_hash, password):
+        print("USER DATA:", user)
+
+        # if not check_password_hash(user.password, password):
+        if password != user.password:
             flash("Incorrect password")
             return render_template('login.html')
-        
+
         if user.must_reset_password:
             return redirect('/reset-password')
+
         session['user'] = user.Username
         session['role'] = user.role
         session['email'] = user.email
-        return redirect(url_for('welcome'))
 
+        return redirect(url_for('welcome'))
     return render_template('login.html')
 
 @app.route('/admin/settings')
@@ -789,16 +793,16 @@ def approve_user():
 
 #     return jsonify({"status": "success"})
 
-@app.route('/admin/users')
-@admin_required
-def admin_users():
-    conn = get_connection()
-    cursor = conn.cursor()
+# @app.route('/admin/users')
+# @admin_required
+# def admin_users():
+#     conn = get_connection()
+#     cursor = conn.cursor()
 
-    cursor.execute("SELECT Username, Email, Role FROM portal_users")
-    users = cursor.fetchall()
+#     cursor.execute("SELECT Username, Email, Role FROM portal_users")
+#     users = cursor.fetchall()
 
-    return render_template("admin_users.html", users=users)
+#     return render_template("admin_users.html", users=users)
 
 @app.route('/admin/logs')
 @admin_required
@@ -888,12 +892,26 @@ def send_otp():
     "expires": datetime.now() + timedelta(minutes=2)}
 
     msg = Message(
-        "Password Reset OTP - Genesis DCC",
         sender=app.config['MAIL_USERNAME'],
-        recipients=[email]
+        recipients=[email],
+        subject=f"Your OTP for Genesis DCC Login"
     )
 
-    msg.body = f"Hi, \n  Your Login OTP is: {otp}"
+    msg.body = f"""Hello {username},
+
+Your One-Time Password (OTP) for verification is:
+
+🔢 {otp}
+
+This code is valid for the next 5 minutes.
+
+If you did not request this, please ignore this email — your account is safe.
+
+For security reasons:
+• Do not share this code with anyone
+• Our team will never ask for your OTP
+
+ Genesis Data Control Centre (DCC)"""
 
     try:
         mail.send(msg)
@@ -1043,7 +1061,7 @@ def run_query():
     except Exception as e:
         log_dq_query(table_name=data.get("table_name"), 
                      column_name=data.get("column_name"), 
-                     sql_query=sql_query, 
+                     sql_query=None, 
                      status="FAILED", 
                      row_count=0)
         return jsonify({"status":"error", "message": str(e)}), 500
@@ -1474,6 +1492,9 @@ INSTRUCTIONS:
 5. DO NOT use INSERT, UPDATE, DELETE, DROP, ALTER, EXEC.
 6. If unsure, return null values.
 7. Return STRICT JSON format:
+8. Please ensure that you use the exact table and column names as provided in the schema, including correct casing.
+9. do not add any extra character like underscore or space in the table and column names. use them exactly as they are in the schema.
+10. pack each column names in square brackets in the generated SQL query, for example [ColumnName].
 
 {{
   "identified_table": "...",
@@ -1586,6 +1607,34 @@ INSTRUCTIONS:
             "status": "error",
             "message": str(e)
         }), 500
+
+
+@app.route('/admin/users', methods=['GET', 'POST'])
+def admin_users():
+    tables = 'portal_users', 'user_requests', 'Suggestions', 'dq_query_log', 'Master_Rules'
+    data = None
+    if request.method == 'POST':
+        selected_table = request.form.get('table_name')
+        # Safety check
+        if selected_table not in tables:
+            flash('Invalid table selected!', 'danger')
+            return redirect(url_for('admin_users'))
+        query = f"SELECT * FROM {selected_table}"
+        temp_conn = get_connection()
+        cursor = temp_conn.cursor()
+        cursor.execute(query)
+        columns = [col[0] for col in cursor.description]
+        rows = cursor.fetchall()
+        data = {
+            'columns': columns,
+            'rows': rows
+        }
+    return render_template(
+        'admin_users.html',
+        tables=tables,
+        data=data
+    )
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
