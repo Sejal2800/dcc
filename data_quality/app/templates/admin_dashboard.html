@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis DCC - Welcome</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/dcc_logo.png') }}">
+    <title>Genesis DCC - Raw Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+    <link rel="icon" type="image/png"  href="{{ url_for('static', filename='images/dcc_logo.png') }}">
     <style>
         :root {
             --primary-dark: #2c3e50;
             --accent-green: #00ffc8;
-            --glass-white: rgba(255, 255, 255, 0.18);
+            --glass-white: rgba(255, 255, 255, 0.95);
         }
 
         body {
@@ -22,254 +21,124 @@
             display: flex;
             flex-direction: column;
             color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* --- Unified Header --- */
-        .company-header {
-            background: white;
-            padding: 0.5rem 2%; 
-            display: flex;
-            align-items: center; 
-            justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            height: 90px;
-            width: 100%;
-        }
+/* --- Updated Header CSS --- */
+.company-header {
+    background: white;
+    padding: 0.5rem 2%; /* Reduced from 5% to push elements to the edges */
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 90px;
+    width: 100%;
+}
 
-        .header-left { flex: 1; display: flex; justify-content: flex-start; }
-        .header-logo { height: 75px; width: auto; object-fit: contain; }
-        .header-center { flex: 2; text-align: center; }
-        .company-title { margin: 0; font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); white-space: nowrap; }
-        
-        .header-right-actions {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-        }
+.header-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Forces logo to the far left */
+}
 
-        .btn-profile {
-            background-color: #f8f9fa !important;
-            border: 1px solid #dee2e6 !important;
-            color: var(--primary-dark) !important;
-            padding: 0 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            height: 42px; 
-            transition: all 0.2s ease;
-        }
+.header-logo {
+    height: 85px; 
+    width: auto;
+    object-fit: contain;
+}
+
+.header-center {
+    flex: 2;
+    text-align: center;
+}
+
+.company-title {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    white-space: nowrap; /* Prevents title from wrapping */
+}
+
+.header-right-actions {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Forces buttons to the far right */
+    gap: 12px;
+}
+
+.nav-action-btn, .btn-profile {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    color: var(--primary-dark) !important;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* FIX: Specific targeting for Hover and Open states */
+.nav-action-btn:hover, 
+.profile-dropdown .btn-profile:hover, 
+.profile-dropdown .btn-profile.show,
+.profile-dropdown .show > .btn-profile {
+    background-color: var(--primary-dark) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-dark) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* FIX: Ensure the icon changes color too */
+.nav-action-btn:hover i, 
+.btn-profile:hover i,
+.btn-profile.show i {
+    color: #ffffff !important;
+}
+
+/* Remove the default Bootstrap arrow rotation/shadow if desired */
+.dropdown-toggle::after {
+    vertical-align: middle;
+}
 
         /* --- Main Content --- */
-        .welcome-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .welcome-title {
+        .main-title {
             font-size: 2.8rem;
-            margin-bottom: 60px;
-            font-weight: 500;
-            color: #e9fffa;
-            text-shadow: 0 0 15px rgba(0, 255, 200, 0.4), 2px 2px 12px rgba(0,0,0,0.7);
-        }
-
-        /* --- Flash Cards --- */
-        .cards-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 1200px;
-        }
-
-        .flash-card {
-            background: var(--glass-white);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            width: 320px;
-            padding: 40px 30px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        .flash-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
-            background: rgba(255, 255, 255, 0.22);
-        }
-
-        .flash-card h3 {
-            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 15px;
+            margin-top: 2rem; /* Spacing from header */
+            margin-bottom: 2.5rem;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
         }
 
-        .flash-card ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
-
-        .flash-card ul li {
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .flash-card ul li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-        }
-
-        .card-action {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,0.9);
-            padding: 12px;
-            border-radius: 50px;
-            color: #ffffff;
-            font-weight: 600;
-            text-decoration: none;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .card-action:hover {
-            background: #ffffff;
-            color: var(--primary-dark);
-        }
-
-        /* --- Chatbot (GIA) Styling --- */
-        #ai-bot {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 200px;
-            cursor: pointer;
-            z-index: 1001;
-            animation: floatBot 4s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
-        }
-
-        @keyframes floatBot {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        #chatbot-container {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 380px;
-            height: 500px;
-            background: white;
+        .card {
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 1002;
+            border: none;
+            background: var(--glass-white);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             color: #333;
         }
 
-        #chat-header {
-            background: var(--primary-dark);
-            color: white;
-            padding: 18px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .form-select-lg {
+            font-size: 1rem;
+            border: 2px solid #eee;
         }
 
-        #chat-body {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-
-        #chat-input {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-top: 1px solid #ddd;
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        .message-bubble {
-            max-width: 85%;
-            padding: 12px 16px;
-            margin-bottom: 10px;
+        /* Table Styling */
+        .table-container {
+            margin-top: 20px;
             border-radius: 15px;
-            font-size: 0.9rem;
-        }
-
-        .gia-msg { background: #e9ecef; color: #2d3748; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .user-msg { background: var(--primary-dark); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-        
-        .chat-chip {
+            overflow: hidden;
             background: white;
-            border: 1px solid var(--primary-dark);
-            color: var(--primary-dark);
-            padding: 6px 14px;
-            margin: 4px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
         }
-
-        .chat-chip:hover { background: var(--primary-dark); color: white; }
-        .hidden { display: none !important; }
-        .avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #4facfe, #00c6ff);
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile-menu {
-    border-radius: 12px;
-    min-width: 250px;
-}
-
-.user-info {
-    background: #f8f9fa;
-    border-radius: 10px;
-}
     </style>
 </head>
 <body>
@@ -282,136 +151,41 @@
     <div class="header-center">
         <h1 class="company-title">Genesis Data Control Centre</h1>
     </div>
-
     <div class="header-right-actions">
-        <div class="dropdown profile-dropdown">
-        <button class="btn btn-profile dropdown-toggle d-flex align-items-center"
-        type="button"
-        id="userMenu"
-        data-bs-toggle="dropdown">
-
-    <div style="
-         width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #333;
-    font-weight: 600;
-    font-size: 13px;
-    backdrop-filter: blur(6px);
-">
-        {{ user_acronym }}
-    </div>
-
-</button>
-<ul class="dropdown-menu dropdown-menu-end profile-menu shadow border-0">
-
-    <!-- USER INFO -->
-    <li class="px-3 py-3 user-info">
-        <div class="d-flex align-items-center gap-2">
-            <div class="avatar">
-                {{ session['user'][0]|upper }}
-            </div>
-            <div>
-                <div class="fw-semibold">{{ session['user'] }}</div>
-                <div class="text-muted small">{{ session.get('email', '') }}</div>
-                <div class="badge bg-light text-dark mt-1">{{ session.get('role', 'User') }}</div>
-            </div>
-        </div>
-    </li>
-
-    <li><hr class="dropdown-divider"></li>
-
-    <!-- ACTIONS -->
-    <li>
-        <a class="dropdown-item" href="#">
-            <i class="bi bi-person me-2"></i> Account Settings
-        </a>
-    </li>
-
-    <li>
-        <a class="dropdown-item" href="#">
-            <i class="bi bi-question-circle me-2"></i> Help Center
-        </a>
-    </li>
-
-    <li><hr class="dropdown-divider"></li>
-
-    <li>
-        <a class="dropdown-item text-danger" href="/logout">
-            <i class="bi bi-box-arrow-right me-2"></i> Logout
-        </a>
-    </li>
-
-<li>
-    <a class="dropdown-item" href="{{ url_for('admin_dashboard') }}">
-        <i class="bi bi-gear me-2"></i> Admin Settings
-    </a>
-</li>
-
-</ul>
-        </div>
+        <a href="{{ url_for('welcome') }}" class="nav-action-btn"><i class="bi bi-house-door-fill"></i> Home</a>
+        <a href="{{ url_for('account_details') }}" class="nav-action-btn"><i class="bi bi-person-circle"></i> Account</a>
+        <a href="{{ url_for('help_center') }}" class="nav-action-btn"><i class="bi bi-question-circle-fill"></i> Help</a>
+        <a href="{{ url_for('logout') }}" class="nav-action-btn"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </div>
 </header>
 
-<main class="welcome-container">
+{% block content %}
 
-    <h1 class="welcome-title">⚙️ Admin Controls</h1>
+<div class="main-card">
 
-    <div class="cards-wrapper">
+    <h3 class="mb-4">Admin Dashboard</h3>
 
-        <!-- Access Requests -->
-        <div class="flash-card">
-            <h3>Access Requests</h3>
+    <div class="row g-4">
 
-            <ul>
-                <li>Review pending user access</li>
-                <li>Approve or reject requests</li>
-                <li>Assign roles to users</li>
-            </ul>
-
-            <a href="/admin/requests" class="card-action">
-                Manage Requests
-            </a>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h5>User Requests</h5>
+                <p>Approve or reject access</p>
+                <a href="{{ url_for('admin_requests') }}" class="btn btn-primary">View</a>
+            </div>
         </div>
 
-        <!-- User Management -->
-        <div class="flash-card">
-            <h3>User Management</h3>
-
-            <ul>
-                <li>View all registered users</li>
-                <li>Monitor roles and access</li>
-                <li>Maintain user data</li>
-            </ul>
-
-            <a href="/admin/users" class="card-action">
-                View Users
-            </a>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Users</h5>
+                <p>View registered users</p>
+                <a href="{{ url_for('admin_users') }}" class="btn btn-primary">View</a>
+            </div>
         </div>
 
-        <!-- System Logs -->
-        <!-- <div class="flash-card">
-            <h3>System Logs</h3>
-
-            <ul>
-                <li>Track DQ query execution</li>
-                <li>Monitor chatbot activity</li>
-                <li>Debug system issues</li>
-            </ul>
-
-            <a href="/admin/logs" class="card-action">
-                View Logs
-            </a>
-        </div> -->
-
+        
     </div>
 
-</main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+
+{% endblock %}

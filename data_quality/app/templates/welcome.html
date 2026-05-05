@@ -328,13 +328,13 @@
 
     <!-- ACTIONS -->
     <li>
-        <a class="dropdown-item" href="#">
-            <i class="bi bi-person me-2"></i> Account Settings
+        <a class="dropdown-item" href="{{ url_for('account_details') }}">
+            <i class="bi bi-person me-2"></i> Account Details
         </a>
     </li>
 
     <li>
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" href="{{ url_for('help_center') }}">
             <i class="bi bi-question-circle me-2"></i> Help Center
         </a>
     </li>
@@ -346,13 +346,13 @@
             <i class="bi bi-box-arrow-right me-2"></i> Logout
         </a>
     </li>
-
+{% if role == 'admin' %}
 <li>
     <a class="dropdown-item" href="{{ url_for('admin_dashboard') }}">
         <i class="bi bi-gear me-2"></i> Admin Settings
     </a>
 </li>
-
+{% endif %}
 </ul>
         </div>
     </div>
