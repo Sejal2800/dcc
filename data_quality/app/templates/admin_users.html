@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis DCC - Users Data</title>
+    <title>Genesis DCC - Raw Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="icon" type="image/png"  href="{{ url_for('static', filename='images/dcc_logo.png') }}">
@@ -152,88 +151,53 @@
     <div class="header-center">
         <h1 class="company-title">Genesis Data Control Centre</h1>
     </div>
-
+    
     <div class="header-right-actions">
-        <a href="{{ url_for('welcome') }}" class="nav-action-btn">
-            <i class="bi bi-arrow-left"></i> Back
-        </a>
-        <a href="{{ url_for('welcome') }}" class="nav-action-btn">
-            <i class="bi bi-house"></i> Home
-        </a>
-
-        <div class="dropdown profile-dropdown">
-            <button class="btn btn-profile dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle"></i>
-                <span class="d-none d-sm-inline">Account</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userMenu">
-                <li><h6 class="dropdown-header">User Settings</h6></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-person-badge me-2"></i> My Details</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="/logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
-            </ul>
-        </div>
+        <a href="{{ url_for('welcome') }}" class="nav-action-btn"><i class="bi bi-house-door-fill"></i> Home</a>
+        <a href="{{ url_for('account_details') }}" class="nav-action-btn"><i class="bi bi-person-circle"></i> Account</a>
+        <a href="{{ url_for('help_center') }}" class="nav-action-btn"><i class="bi bi-question-circle-fill"></i> Help</a>
+        <a href="{{ url_for('logout') }}" class="nav-action-btn"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </div>
 </header>
 
-<main class="container py-5">
-    <div class="text-center">
-        <h1 class="main-title">View Users</h1>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="card p-4">
-                    <form method="POST">
-                        <div class="mb-4 text-start">
-                            <label class="form-label fw-bold">Select User Role</label>
-                            <select name="table_name" class="form-select form-select-lg" required style="border-radius: 12px;">
-                                <option value="">-- Choose a role --</option>
-                                {% for table in tables %}
-                                    <option value="{{ table }}">{{ table }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold" style="border-radius: 12px; background: var(--primary-dark); border: none;">
-                            <i class="bi bi-search me-2"></i> Fetch Data
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
+{% block content %}
 
-        {% if data %}
-        <div class="mt-5 text-start">
-            <h4 class="results-heading text-white border-bottom pb-2">
-                Results for: <span style="color: var(--accent-green);">{{ selected_table }}</span>
-            </h4>
-            
-            <div class="table-container shadow-lg">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="table-dark">
-                            <tr>
-                                {% for col in data.columns %}
-                                    <th class="py-3 px-4">{{ col }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for row in data.rows %}
-                                <tr>
-                                    {% for cell in row %}
-                                        <td class="px-4">{{ cell }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        {% endif %}
+<div class="main-card">
+
+    <h3 class="mb-4">Users Data</h3>
+
+    <form method="POST" class="mb-3">
+        <select name="table_name" class="form-select w-25 d-inline">
+            {% for t in tables %}
+                <option value="{{ t }}">{{ t }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary">Load</button>
+    </form>
+
+    {% if data %}
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    {% for col in data.columns %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data.rows %}
+                <tr>
+                    {% for item in row %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-</main>
+    {% endif %}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+
+{% endblock %}

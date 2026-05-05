@@ -105,33 +105,39 @@ def send_email(to_email, password, user_name):
 
     msg.html = f"""
     <html>
-    <body style="font-family: Arial; background:#f4f6f9; padding:20px;">
-        <div style="max-width:600px; margin:auto; background:white; padding:30px; border-radius:10px;">
-            
-            <h2 style="color:#2c3e50;">Welcome to Genesis DCC</h2>
+     <body style="font-family:Arial;background:#f4f6f9;padding:20px;">
+        <div style="max-width:600px;margin:auto;background:white;border-radius:10px;overflow:hidden;">
 
-            <p>Your account has been successfully created.</p>
+            <div style="background:#2a5298;padding:20px;text-align:center;">
+                <img src="http://127.0.0.1:5000/static/images/dcc_logo.png" height="50">
+            </div>
 
-            <h3>Login Credentials:</h3>
-            <p><b>Username:</b> {user_name}</p>
-            <p><b>Temporary Password:</b> {password}</p>
+            <div style="padding:30px;">
+                <h2 style="color:#2a5298;">Welcome {user_name} 🎉</h2>
 
-            <p style="color:red;"><b>⚠ You must reset your password on first login.</b></p>
+                <p>Your account has been approved.</p>
 
-            <hr>
+                <div style="background:#f1f1f1;padding:15px;border-radius:8px;">
+                    <p><b>Username:</b> {user_name}</p>
+                    <p><b>Password:</b> {password}</p>
+                </div>
 
-            <p>
-                Explore powerful Data Quality insights, dashboards, and analytics.
-            </p>
+                <p style="color:red;"><b>⚠ Reset password on first login</b></p>
 
-            <br>
-            <p>Regards,<br><b>Genesis DCC Team</b></p>
+                <a href="http://localhost:5000/login"
+                   style="display:inline-block;background:#2a5298;color:white;padding:10px 20px;border-radius:5px;text-decoration:none;">
+                   Login Now
+                </a>
+
+                <hr>
+                <p style="font-size:12px;color:#888;">Genesis Data Control Centre</p>
+            </div>
 
         </div>
     </body>
     </html>
     """
-
+    
     mail.send(msg)
 
 def get_table_names():
@@ -666,7 +672,7 @@ def login():
         cursor = temp_conn.cursor()
 
         cursor.execute(
-        "SELECT Username, email, password, must_reset_password, role FROM portal_users WHERE Username = ?",
+        "SELECT Username, email, password_hash, must_reset_password, role FROM portal_users WHERE Username = ?",
         (username,)
         )
 
@@ -679,11 +685,13 @@ def login():
         print("USER DATA:", user)
 
         # if not check_password_hash(user.password, password):
-        if password != user.password:
+        if not check_password_hash(user.password_hash, password):
             flash("Incorrect password")
             return render_template('login.html')
 
         if user.must_reset_password:
+            session['user'] = user.Username
+            session['email'] = user.email
             return redirect('/reset-password')
 
         session['user'] = user.Username
@@ -693,10 +701,10 @@ def login():
         return redirect(url_for('welcome'))
     return render_template('login.html')
 
-@app.route('/admin/settings')
-@admin_required
-def admin_settings():
-    return render_template('admin_dashboard.html')
+# @app.route('/admin/settings')
+# @admin_required
+# def admin_settings():
+#     return render_template('admin_dashboard.html')
 
 @app.route('/request_access', methods=['POST'])
 def request_access():
@@ -744,12 +752,8 @@ def admin_requests():
     return render_template("admin_requests.html", requests=data)
 
 @app.route('/admin')
-# @login_required
 @admin_required
 def admin_dashboard():
-    # if session.get('role') != 'admin':
-    #     flash("Access denied")
-    #     return redirect(url_for('welcome'))
     return render_template('admin_dashboard.html')
 
 @app.route('/approve_user', methods=['POST'])
@@ -814,17 +818,6 @@ def admin_logs():
     dq_logs = cursor.fetchall()
 
     return render_template("admin_logs.html", logs=dq_logs)
-
-@app.route('/admin/reject_request/<int:req_id>', methods=['POST'])
-def reject_request(req_id):
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("UPDATE user_requests SET status='rejected' WHERE id=?", (req_id,))
-    conn.commit()
-    conn.close()
-
-    return jsonify({"status": "rejected"})
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():
@@ -894,7 +887,7 @@ def send_otp():
     msg = Message(
         sender=app.config['MAIL_USERNAME'],
         recipients=[email],
-        subject=f"Your OTP for Genesis DCC Login"
+        subject=f"Your OTP for Genesis DCC Portal Password Reset"
     )
 
     msg.body = f"""Hello {username},
@@ -955,8 +948,10 @@ def verify_otp():
     temp_conn = get_connection()
     cursor = temp_conn.cursor()
     cursor.execute(
-        "UPDATE portal_users SET password_hash = ? WHERE Username = ?",
-        (hashed_password, username)
+        """UPDATE portal_users 
+        SET password_hash = ?, password = ?, must_reset_password = 0
+        WHERE Username = ?""",
+        (hashed_password, new_password, username)
     )
     temp_conn.commit()
 
@@ -994,6 +989,65 @@ def verify_signup_otp():
     del otp_store_signup[username]
 
     return jsonify({"status": "success"})
+
+@app.route('/account_details')
+@login_required
+def account_details():
+    temp_conn = get_connection()
+    cursor = temp_conn.cursor()
+
+    cursor.execute("""
+        SELECT Username, Email, Role
+        FROM portal_users
+        WHERE Username = ?
+    """, (session['user'],))
+
+    user = cursor.fetchone()
+
+    return render_template('account_details.html', user=user)
+
+@app.route('/help-center')
+@login_required
+def help_center():
+    return render_template('help_center.html')
+
+@app.route('/admin/reject_request/<int:req_id>', methods=['POST'])
+def reject_request(req_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT email, name FROM user_requests WHERE id=?", (req_id,))
+    user = cursor.fetchone()
+
+    cursor.execute("UPDATE user_requests SET status='rejected' WHERE id=?", (req_id,))
+    conn.commit()
+    conn.close()
+
+    # send rejection mail
+    msg = Message(
+        subject="Request Rejected - Genesis DCC",
+        sender=app.config['MAIL_USERNAME'],
+        recipients=[user.email]
+    )
+
+    msg.html = f"""
+        <div style="max-width:600px;margin:auto;background:white;padding:30px;">
+            <h2 style="color:#e74c3c;">Request Update</h2>
+
+            <p>Hello {user.name},</p>
+
+            <p>We regret to inform you that your request was not approved.</p>
+
+            <p>If you believe this is incorrect, contact support.</p>
+
+            <hr>
+            <p style="font-size:12px;">Genesis DCC Team</p>
+        </div>
+        """
+
+    mail.send(msg)
+
+    return jsonify({"status": "rejected"})
 
 @app.route('/dataquality')
 def dataquality():
