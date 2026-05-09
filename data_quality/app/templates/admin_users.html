@@ -13,7 +13,7 @@
             --accent-green: #00ffc8;
             --glass-white: rgba(255, 255, 255, 0.95);
         }
-
+ 
         body {
             background: linear-gradient(rgba(44,62,80,0.8), rgba(44,62,80,0.8)),
                         url('{{ url_for("static", filename="images/dq_bg_6.png") }}') center/cover fixed;
@@ -24,7 +24,7 @@
             font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
-/* --- Updated Header CSS --- */
+
 .company-header {
     background: white;
     padding: 0.5rem 2%; /* Reduced from 5% to push elements to the edges */
@@ -139,6 +139,54 @@
             overflow: hidden;
             background: white;
         }
+        .main-card {
+    width: 92%;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 35px;
+    border-radius: 24px;
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.main-card h3 {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+/* Better table look */
+.table {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.table th {
+    white-space: nowrap;
+}
+
+/* Better buttons */
+.btn-primary,
+.btn-success,
+.btn-danger {
+    border-radius: 10px;
+    padding: 8px 18px;
+    font-weight: 600;
+}
+
+/* Form Styling */
+.form-select,
+.form-control {
+    border-radius: 12px;
+    min-height: 45px;
+}
     </style>
 </head>
 <body>
@@ -151,7 +199,6 @@
     <div class="header-center">
         <h1 class="company-title">Genesis Data Control Centre</h1>
     </div>
-    
     <div class="header-right-actions">
         <a href="{{ url_for('welcome') }}" class="nav-action-btn"><i class="bi bi-house-door-fill"></i> Home</a>
         <a href="{{ url_for('account_details') }}" class="nav-action-btn"><i class="bi bi-person-circle"></i> Account</a>
@@ -167,12 +214,12 @@
     <h3 class="mb-4">Users Data</h3>
 
     <form method="POST" class="mb-3">
-        <select name="table_name" class="form-select w-25 d-inline">
+        <select name="table_name" class="form-select d-inline-block me-2" style="max-width: 300px;">
             {% for t in tables %}
                 <option value="{{ t }}">{{ t }}</option>
             {% endfor %}
         </select>
-        <button class="btn btn-primary">Load</button>
+        <button class="btn btn-primary px-4"> <i class="bi bi-search"></i> Load </button>
     </form>
 
     {% if data %}
