@@ -17,19 +17,22 @@ import string
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY")
+# app.secret_key = os.getenv("FLASK_SECRET_KEY")
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
 app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+if not app.config.get('MAIL_PASSWORD'):
+    raise Exception("MAIL_PASSWORD not set in environment")
 app.secret_key = os.getenv('SECRET_KEY')
 FAQ_DF = pd.read_csv("portal_faq.csv", encoding="utf-8")
 
 otp_store = {}
 otp_store_signup = {}
 mail = Mail(app)
+mail.init_app(app)
 ALLOWED_TABLES = {
     "Customer",
     "CustomerTexts",
@@ -63,16 +66,20 @@ def table_exists(table_name):
     temp_conn = get_connection()
     cursor = temp_conn.cursor()
     cursor.execute("SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = ?", (table_name,))
-    return cursor.fetchone() is not None
+    result = cursor.fetchone()
+    temp_conn.close()
+    return result is not None
 
 def column_exists(table_name, column_name):
     temp_conn = get_connection()
     cursor = temp_conn.cursor()
     cursor.execute("SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ? AND COLUMN_NAME = ?", (table_name, column_name))
-    return cursor.fetchone() is not None
+    result = cursor.fetchone()
+    temp_conn.close()
+    return result is not None
 
 def create_user_from_request(request_id,role):
-
+    role=role
     temp_conn = get_connection()
     cursor = temp_conn.cursor()
 
@@ -81,7 +88,7 @@ def create_user_from_request(request_id,role):
     
     temp_password = generate_temp_password()
     hashed_password = generate_password_hash(temp_password)
-
+    
     cursor.execute("""
         INSERT INTO portal_users (username, email, password, role, must_reset_password, password_hash)
         VALUES (?, ?, ?,?, ?, ?)
@@ -159,6 +166,7 @@ def get_db_schema():
         ORDER BY TABLE_NAME
     """)
     rows = cursor.fetchall()
+    temp_conn.close()
 
     schema = {}
     for table, column, dtype in rows:
@@ -432,6 +440,7 @@ def log_dq_query(
             row_count
         ))
         temp_conn.commit()
+        temp_conn.close()
     except Exception as e:
         print("⚠ DQ log insert failed:", e)
 
@@ -460,7 +469,9 @@ def log_analytics_query(
         ))
         temp_conn.commit()
     except Exception as e:
-        print("⚠ DQ log insert failed:", e)
+        app.logger.error(f"Analytics log insert failed: {e}")
+    finally:
+        temp_conn.close()
 
 def add_new_rule_helper(table_name: str, column_name: str, business_rule: str, dimension: str) -> str:
     temp_conn = get_connection()
@@ -529,7 +540,7 @@ def add_new_rule_helper(table_name: str, column_name: str, business_rule: str, d
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (rule_no, table_name, column_name, business_rule, functionality, datatype, attribute_group, dimension))
     temp_conn.commit()
-
+    temp_conn.close()
     return rule_no
 
 def get_categories():
@@ -614,7 +625,7 @@ def log_chat(question, source, response):
         temp_conn.close()
         print("Chat log inserted successfully.")
     except Exception as e:
-        print(f"CHAT LOG DB ERROR: {e}")
+        app.logger.error(f"Chat log failed: {e}")
 def generate_temp_password():
     return ''.join(random.choices(string.ascii_letters + string.digits, k=10))
 
@@ -632,6 +643,16 @@ def get_user_acronym(username):
     if len(parts) == 1:
         return username[:2].upper()
     return (parts[0][0] + parts[1][0]).upper()
+
+def safe_cursor():
+    conn = get_connection()
+    return conn, conn.cursor()
+
+def cleanup_otp_store():
+    now = datetime.now()
+    expired = [k for k, v in otp_store.items() if v.get("expires") < now]
+    for k in expired:
+        del otp_store[k]
 
 def admin_required(f):
     @wraps(f)
@@ -700,11 +721,32 @@ def login():
 
         return redirect(url_for('welcome'))
     return render_template('login.html')
+@app.route('/reset-password', methods=['GET', 'POST'])
+def reset_password():
+    if 'user' not in session:
+        return redirect(url_for('login'))
 
-# @app.route('/admin/settings')
-# @admin_required
-# def admin_settings():
-#     return render_template('admin_dashboard.html')
+    if request.method == 'POST':
+        new_password = request.form['password']
+
+        hashed = generate_password_hash(new_password)
+
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            UPDATE portal_users
+            SET password_hash = ?, must_reset_password = 0
+            WHERE Username = ?
+        """, (hashed, session['user']))
+
+        conn.commit()
+        conn.close()
+
+        flash("Password updated successfully")
+        return redirect(url_for('welcome'))
+
+    return render_template("reset_password.html")
 
 @app.route('/request_access', methods=['POST'])
 def request_access():
@@ -761,7 +803,7 @@ def admin_dashboard():
 def approve_user():
     data = request.get_json()
     request_id = data.get("id")
-    role = data.get("role", "user")  # default role
+    role = data.get("role")  # default role
 
     create_user_from_request(request_id, role)
 
@@ -882,7 +924,7 @@ def send_otp():
     otp = str(random.randint(100000, 999999))
     otp_store[username] = {
     "otp": otp,
-    "expires": datetime.now() + timedelta(minutes=2)}
+    "expires": datetime.now() + timedelta(minutes=5)}
 
     msg = Message(
         sender=app.config['MAIL_USERNAME'],
@@ -980,10 +1022,10 @@ def verify_signup_otp():
     temp_conn = get_connection()
     cursor = temp_conn.cursor()
 
-    cursor.execute(
-        "INSERT INTO portal_users (Username, password_hash, Email) VALUES (?, ?, ?)",
-        (username, hashed_password, email)
-    )
+    cursor.execute("""
+        INSERT INTO portal_users 
+        (Username, Email, password_hash, role, must_reset_password)
+        VALUES (?, ?, ?, 'user', 1)""" )
     temp_conn.commit()
 
     del otp_store_signup[username]
@@ -1041,7 +1083,7 @@ def reject_request(req_id):
             <p>If you believe this is incorrect, contact support.</p>
 
             <hr>
-            <p style="font-size:12px;">Genesis DCC Team</p>
+            <p style="font-size:12px;">Genesis DnAI Team</p>
         </div>
         """
 
@@ -1063,7 +1105,7 @@ def raw_data():
         if selected_table not in tables:
             flash('Invalid table selected!', 'danger')
             return redirect(url_for('raw_data'))
-        query = f"SELECT * FROM {selected_table}"
+        query = "SELECT * FROM [{}]".format(selected_table)
         temp_conn = get_connection()
         cursor = temp_conn.cursor()
         cursor.execute(query)
@@ -1664,6 +1706,7 @@ INSTRUCTIONS:
 
 
 @app.route('/admin/users', methods=['GET', 'POST'])
+@admin_required
 def admin_users():
     tables = 'portal_users', 'user_requests', 'Suggestions', 'dq_query_log', 'Master_Rules'
     data = None
@@ -1679,6 +1722,7 @@ def admin_users():
         cursor.execute(query)
         columns = [col[0] for col in cursor.description]
         rows = cursor.fetchall()
+        temp_conn.close()
         data = {
             'columns': columns,
             'rows': rows
