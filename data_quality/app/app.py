@@ -27,7 +27,13 @@ app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 if not app.config.get('MAIL_PASSWORD'):
     raise Exception("MAIL_PASSWORD not set in environment")
 app.secret_key = os.getenv('SECRET_KEY')
-FAQ_DF = pd.read_csv("portal_faq.csv", encoding="utf-8")
+# FAQ_DF = pd.read_csv("portal_faq.csv", encoding="utf-8")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+faq_path = os.path.join(BASE_DIR, "portal_faq.csv")
+
+FAQ_DF = pd.read_csv(faq_path, encoding="utf-8")
 
 otp_store = {}
 otp_store_signup = {}
